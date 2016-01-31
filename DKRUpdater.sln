@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DKRUpdater.Core", "DKRUpdater.Core\DKRUpdater.Core.csproj", "{96D9EB5A-AAEF-4F4E-A6A5-C8AA557CF9EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DKRUpdater.Feeds", "DKRUpdater.Feeds\DKRUpdater.Feeds.csproj", "{8ED9F998-58A1-40AB-8486-7E874043E7BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DKRUpdater.Playlists", "DKRUpdater.Playlists\DKRUpdater.Playlists.csproj", "{3F1E9C4E-8441-48E2-93DA-3DA84CF0FD91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DKRUpdater.Main", "DKRUpdater.Main\DKRUpdater.Main.csproj", "{763C00CA-9C6E-4B41-8CCB-0EDC0E7630B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "info", "info", "{63405DAF-D7FB-4B62-965F-039DB92595DC}"
+	ProjectSection(SolutionItems) = preProject
+		readme.txt = readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6F9BEAE9-2AD7-4D4F-AA4E-94C318EFA919}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DKRUpdater.Core.Tests", "DKRUpdater.Core.Tests\DKRUpdater.Core.Tests.csproj", "{D801578B-D1CF-4333-AA5E-4532EEFBF99F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96D9EB5A-AAEF-4F4E-A6A5-C8AA557CF9EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D9EB5A-AAEF-4F4E-A6A5-C8AA557CF9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D9EB5A-AAEF-4F4E-A6A5-C8AA557CF9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D9EB5A-AAEF-4F4E-A6A5-C8AA557CF9EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ED9F998-58A1-40AB-8486-7E874043E7BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ED9F998-58A1-40AB-8486-7E874043E7BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ED9F998-58A1-40AB-8486-7E874043E7BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ED9F998-58A1-40AB-8486-7E874043E7BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F1E9C4E-8441-48E2-93DA-3DA84CF0FD91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F1E9C4E-8441-48E2-93DA-3DA84CF0FD91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F1E9C4E-8441-48E2-93DA-3DA84CF0FD91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F1E9C4E-8441-48E2-93DA-3DA84CF0FD91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{763C00CA-9C6E-4B41-8CCB-0EDC0E7630B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{763C00CA-9C6E-4B41-8CCB-0EDC0E7630B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{763C00CA-9C6E-4B41-8CCB-0EDC0E7630B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{763C00CA-9C6E-4B41-8CCB-0EDC0E7630B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D801578B-D1CF-4333-AA5E-4532EEFBF99F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D801578B-D1CF-4333-AA5E-4532EEFBF99F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D801578B-D1CF-4333-AA5E-4532EEFBF99F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D801578B-D1CF-4333-AA5E-4532EEFBF99F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D801578B-D1CF-4333-AA5E-4532EEFBF99F} = {6F9BEAE9-2AD7-4D4F-AA4E-94C318EFA919}
+	EndGlobalSection
+EndGlobal
