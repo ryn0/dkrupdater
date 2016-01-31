@@ -24,3 +24,11 @@ You can run this console application as a scheduled task on Windows Server.
 6. enable write and modify permissions for NETWORK SERVICE and LOCAL SERVICE on the MP3 folder
 5. move the faad.exe and lame.exe files to the C:\thirdparty directory
 6. create a scheuled task to run DKRUpdater.Main.exe
+
+Current deployment: 
+-------------------
+Das Klub Radio Updater is currently being used to support Das Klub Radio. You can access Das Klub Radio at: https://dasklub.com/radio
+
+You can listen to Das Klub Radio on mobile devices using the ShoutCast or XiiaLive apps (search for: "Das Klub Radio"). 
+
+You can also listen to Das Klub Radio using Winamp or iTunes by opening a stream to the station. 
