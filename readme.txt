@@ -22,8 +22,8 @@ You can run this console application as a scheduled task on Windows Server.
 	d. C:\MP3s\music
 	e. C:\MP3s\playlists
 6. enable write and modify permissions for NETWORK SERVICE and LOCAL SERVICE on the MP3 folder
-5. move the faad.exe and lame.exe files to the C:\thirdparty directory
-6. create a scheuled task to run DKRUpdater.Main.exe
+6. move the faad.exe and lame.exe files to the C:\thirdparty directory
+7. create a scheuled task to run DKRUpdater.Main.exe
 
 Current deployment: 
 -------------------
