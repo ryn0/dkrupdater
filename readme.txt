@@ -32,3 +32,8 @@ Das Klub Radio Updater is currently being used to support Das Klub Radio. You ca
 You can listen to Das Klub Radio on mobile devices using the ShoutCast or XiiaLive apps (search for: "Das Klub Radio"). 
 
 You can also listen to Das Klub Radio using Winamp or iTunes by opening a stream to the station. 
+
+
+Debugging:
+----------
+Das Klub Radio Updater writes to a log file that can be found in: "C:\MP3s\logs". Please look there for all events occuring related to the program.
