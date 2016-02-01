@@ -65,7 +65,7 @@ Version=2";
 
             try
             {
-                Logger.Log(string.Format("Started iterating lines in playlist: '{0}'", playlistPath));
+                Logger.Log(string.Format("Starting iterating lines in playlist: '{0}'...", playlistPath));
 
                 for (int i = 1; i < content.Length - 3; i = i + 3)
                 {
@@ -85,7 +85,7 @@ Version=2";
             }
             catch (Exception ex)
             {
-                Logger.LogError(string.Format("Error reading file: '{0}'", playlistPath), ex);
+                Logger.LogError(string.Format("Error reading playlist file: '{0}'", playlistPath), ex);
             }
 
             return playlist;
