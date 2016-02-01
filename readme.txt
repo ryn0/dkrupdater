@@ -1,7 +1,7 @@
 ----------------------
 Das Klub Radio Updater
 ----------------------
-"DKRUpdater.Main.exe" is a program that fetches podcasts, downloads them (converting them to MP3 if needed from M4A) and then adds them to associated playlists. 
+"DKRUpdater.Main.exe" is a program that downloads podcasts (converting them to MP3 if needed from M4A) and then adds them to associated playlists. 
 
 Feeds specifying the "newmusic.pls" playlist get included in a most recent releases playlist of a specified count.
 
