@@ -14,7 +14,7 @@ namespace DKRUpdater.Core.StringParsing
 
             if (!file.Contains(deliminter))
             {
-                throw new Exception("File missing: " + deliminter);
+                return DateTime.MaxValue;
             }
 
             var datePart = file.Split(deliminter)[0];
