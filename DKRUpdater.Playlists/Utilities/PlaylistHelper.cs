@@ -108,7 +108,7 @@ Version=2";
 
             int lengthInSeconds = 0;
 
-            if (!int.TryParse(length, out lengthInSeconds))
+            if (!int.TryParse(lengthToUse, out lengthInSeconds))
             {
                 Logger.LogError(string.Format("Value '{0}' is not an int", length), new Exception());
             }
