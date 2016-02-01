@@ -69,7 +69,6 @@ Version=2";
             catch (Exception ex)
             {
                 Logger.LogError(string.Format("Error reading file: '{0}'", playlistPath), ex);
-
             }
 
             return playlist;
@@ -107,10 +106,17 @@ Version=2";
             var titleToUse = title.Split('=')[1];
             var lengthToUse = length.Split('=')[1];
 
+            int lengthInSeconds = 0;
+
+            if (!int.TryParse(length, out lengthInSeconds))
+            {
+                Logger.LogError(string.Format("Value '{0}' is not an int", length), new Exception());
+            }
+
             var playlistFile = new PlaylistFile()
             {
                 File = fileToUse,
-                Length = Convert.ToInt32(lengthToUse),
+                Length = lengthInSeconds,
                 Title = titleToUse
             };
 
