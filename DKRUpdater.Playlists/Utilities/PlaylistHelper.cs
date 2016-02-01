@@ -15,6 +15,9 @@ namespace DKRUpdater.Playlists
     {
         const int QuantityOfStationFilesInNewMusicPlaylist = 4;
         const int MaxFilesInNewMusicPlaylist = 12;
+        const string FileKey = "File";
+        const string TitleKey = "Title";
+        const string LengthKey = "Length"; 
 
         const string PlaylistFormat =
 @"[playlist]
@@ -59,7 +62,14 @@ Version=2";
 
                 for (int i = 1; i < content.Length - 3; i = i + 3)
                 {
-                    var mp3InPlaylist = GetPlaylistFileFromPlaylistLine(content[i], content[i + 1], content[i + 2]);
+                    var file = content[i];
+                    var title = content[i + 1];
+                    var length = content[i + 2];
+
+                    if (!IsCorrectFormat(file, title, length))
+                        continue;
+
+                    var mp3InPlaylist = GetPlaylistFileFromPlaylistLine(file, title, length);
 
                     playlist.Add(mp3InPlaylist);
                 }
@@ -72,6 +82,14 @@ Version=2";
             }
 
             return playlist;
+        }
+
+        private static bool IsCorrectFormat(string file, string title, string lenth)
+        {
+            return
+                (file.ToLower().Contains(FileKey.ToLower()) &&
+                title.ToLower().Contains(TitleKey.ToLower()) &&
+                lenth.ToLower().Contains(LengthKey.ToLower()));
         }
 
         private static void CreateDefaultPlaylist(string playlistPath)
@@ -251,11 +269,11 @@ Version=2";
 
             foreach (var playlistEntry in newPlaylist)
             {
-                sb.AppendFormat(@"File{0}={1}", index, playlistEntry.File);
+                sb.AppendFormat(@"{0}{1}={2}", FileKey, index, playlistEntry.File);
                 sb.AppendLine();
-                sb.AppendFormat(@"Title{0}={1}", index, playlistEntry.Title);
+                sb.AppendFormat(@"{0}{1}={2}", TitleKey, index, playlistEntry.Title);
                 sb.AppendLine();
-                sb.AppendFormat(@"Length{0}={1}", index, playlistEntry.Length);
+                sb.AppendFormat(@"{0}{1}={2}", LengthKey, index, playlistEntry.Length);
                 sb.AppendLine();
 
                 index++;
