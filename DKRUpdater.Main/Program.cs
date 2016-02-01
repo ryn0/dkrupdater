@@ -31,23 +31,23 @@ namespace DKRUpdater.Main
 
             var downloadedPodcastsToProcess = new List<DKRPodcastFileToProcess>();
 
-            var danceMachine5000Service = new DanceMachine5000Service();
-            downloadedPodcastsToProcess.AddRange(danceMachine5000Service.GetPodcastFilesForProcessing());
+            //var danceMachine5000Service = new DanceMachine5000Service();
+            //downloadedPodcastsToProcess.AddRange(danceMachine5000Service.GetPodcastFilesForProcessing());
 
-            var darkHorizonsService = new DarkHorizonsService();
-            downloadedPodcastsToProcess.AddRange(darkHorizonsService.GetPodcastFilesForProcessing());
+            //var darkHorizonsService = new DarkHorizonsService();
+            //downloadedPodcastsToProcess.AddRange(darkHorizonsService.GetPodcastFilesForProcessing());
 
-            var oontzCastService = new OontzCastService();
-            downloadedPodcastsToProcess.AddRange(oontzCastService.GetPodcastFilesForProcessing());
+            //var oontzCastService = new OontzCastService();
+            //downloadedPodcastsToProcess.AddRange(oontzCastService.GetPodcastFilesForProcessing());
 
             var theRequiemService = new TheRequiemService();
             downloadedPodcastsToProcess.AddRange(theRequiemService.GetPodcastFilesForProcessing());
 
-            var radioBlastFurnanceService = new RadioBlastFurnanceService();
-            downloadedPodcastsToProcess.AddRange(radioBlastFurnanceService.GetPodcastFilesForProcessing());
+            //var radioBlastFurnanceService = new RadioBlastFurnanceService();
+            //downloadedPodcastsToProcess.AddRange(radioBlastFurnanceService.GetPodcastFilesForProcessing());
 
-            var djRazorGrrlService = new DjRazorGrrlService();
-            downloadedPodcastsToProcess.AddRange(djRazorGrrlService.GetPodcastFilesForProcessing());
+            //var djRazorGrrlService = new DjRazorGrrlService();
+            //downloadedPodcastsToProcess.AddRange(djRazorGrrlService.GetPodcastFilesForProcessing());
 
             return downloadedPodcastsToProcess;
         }

@@ -41,23 +41,35 @@ Version=2";
             }
 
             var playlist = new List<PlaylistFile>();
-
             var content = new string[]{};
 
             try
             {
                 content = File.ReadAllLines(playlistPath);
+                content = content.Where(x => !string.IsNullOrEmpty(x)).ToArray();
             }
             catch (Exception ex)
             {
                 Logger.LogError(string.Format("Cannot read playlist at: '{0}'", playlistPath), ex);
             }
 
-            for (int i = 1; i < content.Length - 3; i = i + 3)
+            try
             {
-                var mp3InPlaylist = GetPlaylistFileFromPlaylistLine(content[i], content[i + 1], content[i + 2]);
+                Logger.Log(string.Format("Started iterating lines in playlist: '{0}'", playlistPath));
 
-                playlist.Add(mp3InPlaylist);
+                for (int i = 1; i < content.Length - 3; i = i + 3)
+                {
+                    var mp3InPlaylist = GetPlaylistFileFromPlaylistLine(content[i], content[i + 1], content[i + 2]);
+
+                    playlist.Add(mp3InPlaylist);
+                }
+
+                Logger.Log(string.Format("Completed iterating lines in playlist: '{0}'", playlistPath));
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(string.Format("Error reading file: '{0}'", playlistPath), ex);
+
             }
 
             return playlist;
@@ -231,7 +243,7 @@ Version=2";
 
             var index = 1;
 
-            foreach(var playlistEntry in newPlaylist)
+            foreach (var playlistEntry in newPlaylist)
             {
                 sb.AppendFormat(@"File{0}={1}", index, playlistEntry.File);
                 sb.AppendLine();
@@ -245,11 +257,18 @@ Version=2";
 
             var entries = sb.ToString();
 
-            entries = entries.TrimEnd('\r', '\n');
+            entries = TrimEnd(entries);
 
             var formattedPlaylist = string.Format(PlaylistFormat, entries, newPlaylist.Count);
 
             return formattedPlaylist;
+        }
+
+        private static string TrimEnd(string content)
+        {
+            content = content.TrimEnd('\r', '\n');
+
+            return content;
         }
 
         private static PlaylistFile GetPlaylistFileFromProdcastFile(DKRPodcastFileToProcess newFile)
