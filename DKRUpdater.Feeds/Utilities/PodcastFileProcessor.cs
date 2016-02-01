@@ -5,7 +5,6 @@ using DKRUpdater.Feeds.DKRModels;
 using DKRUpdater.Feeds.Podcasts.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DKRUpdater.Feeds.Utilities
 {
@@ -24,6 +23,13 @@ namespace DKRUpdater.Feeds.Utilities
 
             var podcastFilesToProcess = new List<DKRPodcastFileToProcess>();
 
+            // get the amount to do first
+            var amountToDownload = GetTotalCountToDownloadForPodcast(
+                    podcastFeedOrigin, destinationDirectoryOfAllPodcastFiles, filterOnTitles, rssFeed);
+
+            Logger.Log(string.Format("There are: '{0}' files to download for: '{1}'", amountToDownload, podcastFeedOrigin));
+
+            // then do each
             foreach (var podcastFile in rssFeed.Channel.Item)
             {
                 if (!IsAllowedPodcast(podcastFile.Title, filterOnTitles))
@@ -65,6 +71,36 @@ namespace DKRUpdater.Feeds.Utilities
             Logger.Log(string.Format("Completed processing of podcasts for: '{0}'", podcastFeedOrigin));
 
             return podcastFilesToProcess;
+        }
+
+        private static int GetTotalCountToDownloadForPodcast<T>(
+            PodcastFeedOrigin podcastFeedOrigin, 
+            string destinationDirectoryOfAllPodcastFiles, 
+            List<string> filterOnTitles, 
+            T rssFeed) where T : IRss
+        {
+            var countOfFeedsToDownload = 0;
+
+            foreach (var podcastFile in rssFeed.Channel.Item)
+            {
+                if (!IsAllowedPodcast(podcastFile.Title, filterOnTitles))
+                    continue;
+
+                var podcastFileUrl = new Uri(podcastFile.Enclosure.Url);
+                var releaseDateOfPodcast = Convert.ToDateTime(podcastFile.PubDate);
+
+                if (PathHelper.PodcastExists(
+                                        podcastFileUrl,
+                                        releaseDateOfPodcast,
+                                        podcastFeedOrigin,
+                                        destinationDirectoryOfAllPodcastFiles))
+                {
+                    continue;
+                }
+                countOfFeedsToDownload++;
+            }
+
+            return countOfFeedsToDownload;
         }
 
         private static bool IsAllowedPodcast(string title, List<string> filterOnTitles)
