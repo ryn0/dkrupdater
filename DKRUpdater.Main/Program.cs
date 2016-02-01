@@ -87,10 +87,12 @@ namespace DKRUpdater.Main
         private static void InitializeLogger()
         {
             log4net.Config.BasicConfigurator.Configure();
-            
+
+            Logger.Log("--------------------------------------------------------------");
             Logger.Log("DKRUpdater starting...");
             Logger.Log("Das Klub Radio Updater - Podcast Retrievel and Placement Task.");
-            Logger.Log("Das Klub  - 2016");
+            Logger.Log("Das Klub | 2016");
+            Logger.Log("--------------------------------------------------------------");
         }
     }
 }
