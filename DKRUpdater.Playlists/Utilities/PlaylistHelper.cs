@@ -110,7 +110,7 @@ Version=2";
 
             if (!int.TryParse(lengthToUse, out lengthInSeconds))
             {
-                Logger.LogError(string.Format("Value '{0}' is not an int", length), new Exception());
+                Logger.LogError(string.Format("Value '{0}' is not an int", lengthToUse), new Exception());
             }
 
             var playlistFile = new PlaylistFile()
