@@ -27,6 +27,13 @@ Version=2";
 
         public static int SecondsInMp3(string path)
         {
+            if (!File.Exists(path))
+            {
+                Logger.LogError(string.Format("Cannot find file to get seconds: '{0}'", path), new Exception());
+
+                return 0;
+            }
+
             var mp3Track = TagLib.File.Create(path);
 
             var seconds = Convert.ToInt32(Math.Floor(mp3Track.Properties.Duration.TotalSeconds));
