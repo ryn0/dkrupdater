@@ -17,7 +17,6 @@ namespace DKRUpdater.Feeds.Utilities
                 Path.GetFileName(pathToDownloadedMp3));
         }
 
-
         public static string SetPathToMp3(string downloadedFilePath)
         {
             if (FileHelper.IsFileM4a(downloadedFilePath))
