@@ -31,6 +31,8 @@ namespace DKRUpdater.Feeds.Utilities
 
             Logger.Log(string.Format("There are: '{0}' files to download for: '{1}'", amountToDownload, podcastFeedOrigin));
 
+            Logger.Log(string.Format("A maximum of: '{0}' files will be downloaded from: '{1}'", maxToDownload, PodcastUri));
+
             int quantityDownloaded = 0;
 
             // then do each
