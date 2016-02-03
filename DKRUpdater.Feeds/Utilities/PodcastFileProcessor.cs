@@ -26,7 +26,6 @@ namespace DKRUpdater.Feeds.Utilities
 
             var podcastFilesToProcess = new List<DKRPodcastFileToProcess>();
 
-            // get the amount to do first
             var totalPossibleToDownload = GetTotalCountToDownloadForPodcast(
                     podcastFeedOrigin, destinationDirectoryOfAllPodcastFiles, filterOnTitles, rssFeed);
 
@@ -37,7 +36,6 @@ namespace DKRUpdater.Feeds.Utilities
             var podcastsToProcess = rssFeed.Channel.Item.OrderByDescending(x => Convert.ToDateTime(x.PubDate))
                                                         .Take(maxNewToDownload);
 
-            // then do each
             foreach (var podcastFile in podcastsToProcess)
             {                
                 if (!IsAllowedPodcast(podcastFile.Title, filterOnTitles))
