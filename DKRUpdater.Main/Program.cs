@@ -4,11 +4,13 @@ using DKRUpdater.Feeds.Constants;
 using DKRUpdater.Feeds.DKRModels;
 using DKRUpdater.Feeds.Services;
 using DKRUpdater.Playlists;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DKRUpdater.Main
 {
+    // todo: consider havinga maximum from a provider the weekly podcasts
     class Program
     {
         static void Main(string[] args)
@@ -91,8 +93,9 @@ namespace DKRUpdater.Main
         {
             log4net.Config.BasicConfigurator.Configure();
 
+            Logger.Log("Current time UTC: '{0}'", DateTime.UtcNow.ToString("u"));
             Logger.Log("--------------------------------------------------------------");
-            Logger.Log("DKRUpdater starting...");
+            Logger.Log("DKRUpdater (version 0.1.11) starting...");
             Logger.Log("Das Klub Radio Updater - Podcast Retrievel and Placement Task.");
             Logger.Log("Das Klub | 2016");
             Logger.Log("--------------------------------------------------------------");

@@ -3,6 +3,7 @@ using DKRUpdater.Core.StringParsing;
 using DKRUpdater.Feeds.Constants;
 using DKRUpdater.Feeds.DKRModels;
 using DKRUpdater.Playlists.Models;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +14,6 @@ namespace DKRUpdater.Playlists
 {
     public class PlaylistHelper
     {
-        const int QuantityOfStationFilesInNewMusicPlaylist = 4;
         const int MaxFilesInNewMusicPlaylist = 12;
         const string FileKey = "File";
         const string TitleKey = "Title";
@@ -45,7 +45,7 @@ Version=2";
         {
             if (!File.Exists(playlistPath))
             {
-                Logger.LogError(string.Format("Cannot find playlist at: '{0}'", playlistPath), new Exception());
+                Logger.LogError(string.Format("Cannot find existing playlist at: '{0}'", playlistPath), new Exception());
 
                 CreateDefaultPlaylist(playlistPath);
             }
@@ -65,7 +65,7 @@ Version=2";
 
             try
             {
-                Logger.Log(string.Format("Starting iterating lines in playlist: '{0}'...", playlistPath));
+                Logger.Log("Starting iterating lines in existing playlist: '{0}'...", playlistPath);
 
                 for (int i = 1; i < content.Length - 3; i = i + 3)
                 {
@@ -81,7 +81,7 @@ Version=2";
                     playlist.Add(mp3InPlaylist);
                 }
 
-                Logger.Log(string.Format("Completed iterating lines in playlist: '{0}'", playlistPath));
+                Logger.Log(string.Format("Completed iterating lines in existing playlist: '{0}'", playlistPath));
             }
             catch (Exception ex)
             {
@@ -122,7 +122,7 @@ Version=2";
                 Logger.LogError(string.Format("Cannot create new playlist file: '{0}'", playlistPath), ex);
             }
 
-            Logger.Log(string.Format("Completed creating playlist at: '{0}'", playlistPath));
+            Logger.Log("Completed creating playlist at: '{0}'", playlistPath);
         }
 
         private static PlaylistFile GetPlaylistFileFromPlaylistLine(string file, string title, string length)
@@ -150,10 +150,10 @@ Version=2";
 
         public static void WriteNewPlaylist(string pathToPlaylist, List<DKRPodcastFileToProcess> mp3sForPlaylist)
         {
-            Logger.Log(string.Format("Writing new playlist to: '{0}'", pathToPlaylist));
-
             var existingPlaylist = GetPlaylist(pathToPlaylist);
 
+            Logger.Log(string.Format("Started writing new playlist to: '{0}'", pathToPlaylist));
+            
             var newPlaylist = IsNewMusicPlaylist(pathToPlaylist) ?
                                    CreateNewMusicPlaylist(mp3sForPlaylist, existingPlaylist) :
                                    CreateStandardPlaylist(mp3sForPlaylist, existingPlaylist);
@@ -169,10 +169,12 @@ Version=2";
                 Logger.LogError(string.Format("Failed to write playlist to: '{0}'", pathToPlaylist), ex);
             }
 
-            Logger.Log(string.Format("Completed writing new playlist to: '{0}'", pathToPlaylist));
+            Logger.Log("Completed writing new playlist to: '{0}'", pathToPlaylist);
         }
 
-        private static List<PlaylistFile> CreateNewMusicPlaylist(List<DKRPodcastFileToProcess> mp3sForPlaylist, List<PlaylistFile> existingPlaylist)
+        private static List<PlaylistFile> CreateNewMusicPlaylist(
+            List<DKRPodcastFileToProcess> mp3sForPlaylist, 
+            List<PlaylistFile> existingPlaylist)
         {
             var datedExistingPlaylist = GetExistingPlaylistWithDates(existingPlaylist);
             var datedNewPlaylist = GetNewPlaylistWithDates(mp3sForPlaylist);
@@ -182,8 +184,9 @@ Version=2";
             possiblePlaylistFiles.AddRange(datedExistingPlaylist);
             possiblePlaylistFiles.AddRange(datedNewPlaylist);
 
-            var mostRecentFiles = possiblePlaylistFiles.OrderByDescending(file => file.PublishDate)
-                                                       .Take(MaxFilesInNewMusicPlaylist + QuantityOfStationFilesInNewMusicPlaylist);
+            var mostRecentFiles = possiblePlaylistFiles.DistinctBy(file => file.File)
+                                                       .OrderByDescending(file => file.PublishDate)
+                                                       .Take(MaxFilesInNewMusicPlaylist);
 
             var newPlaylist = new List<PlaylistFile>();
 

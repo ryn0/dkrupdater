@@ -11,6 +11,11 @@ namespace DKRUpdater.Core.Logging
             log.Debug(message);
         }
 
+        public static void Log(string format,params object[] args)
+        {
+            Log(string.Format(format, args));
+        }
+
         public static void LogError(string message, Exception ex)
         {
             log.Error(message, ex);
