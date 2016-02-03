@@ -93,10 +93,10 @@ namespace DKRUpdater.Main
         {
             log4net.Config.BasicConfigurator.Configure();
 
+            Logger.Log("DKRUpdater (version 0.1.12) starting...");
             Logger.Log("Current time UTC: '{0}'", DateTime.UtcNow.ToString("u"));
             Logger.Log("--------------------------------------------------------------");
-            Logger.Log("DKRUpdater (version 0.1.11) starting...");
-            Logger.Log("Das Klub Radio Updater - Podcast Retrievel and Placement Task.");
+            Logger.Log("Das Klub Radio Updater - Podcast Retrievel and Placement Task");
             Logger.Log("Das Klub | 2016");
             Logger.Log("--------------------------------------------------------------");
         }
