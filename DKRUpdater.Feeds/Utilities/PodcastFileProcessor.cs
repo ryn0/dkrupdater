@@ -34,7 +34,7 @@ namespace DKRUpdater.Feeds.Utilities
 
             Logger.Log("A maximum of: '{0}' files will be downloaded from: '{1}'", maxNewToDownload, PodcastUri);
 
-            var podcastsToProcess = rssFeed.Channel.Item.OrderByDescending(x => x.PubDate)
+            var podcastsToProcess = rssFeed.Channel.Item.OrderByDescending(x => Convert.ToDateTime(x.PubDate))
                                                         .Take(maxNewToDownload);
 
             // then do each
