@@ -8,6 +8,7 @@ namespace DKRUpdater.Core.Enums
         OontzCast = 3,
         TheRequiem = 4,
         RadioBlastFurnance = 5,
-        DjRazorGrrl = 6
+        DjRazorGrrl = 6,
+        CyberageRadio = 7
     }
 }

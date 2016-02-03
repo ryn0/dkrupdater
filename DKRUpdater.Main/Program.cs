@@ -49,6 +49,9 @@ namespace DKRUpdater.Main
             var djRazorGrrlService = new DjRazorGrrlService();
             downloadedPodcastsToProcess.AddRange(djRazorGrrlService.GetPodcastFilesForProcessing());
 
+            var cyberageRadioService = new CyberageRadioService();
+            downloadedPodcastsToProcess.AddRange(cyberageRadioService.GetPodcastFilesForProcessing());
+
             return downloadedPodcastsToProcess;
         }
 

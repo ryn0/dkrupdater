@@ -52,6 +52,7 @@
     <Compile Include="Podcasts\BaseRss\Channel.cs" />
     <Compile Include="Interfaces\IRss.cs" />
     <Compile Include="Podcasts\BaseRss\RssRootBase.cs" />
+    <Compile Include="Services\CyberageRadioService.cs" />
     <Compile Include="Services\RadioBlastFurnanceService.cs" />
     <Compile Include="Services\DanceMachine5000Service.cs" />
     <Compile Include="Podcasts\BaseRss\Enclosure.cs" />
