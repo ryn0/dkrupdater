@@ -9,13 +9,21 @@ using DKRUpdater.Feeds.Podcasts.BaseRss;
 
 namespace DKRUpdater.Feeds.Services
 {
-    public class DjRazorGrrlService : IPodcastRetriever
+    public class DjRazorGrrlService : IRetrievablePodcast
     {
         public string DestinationDirectoryOfAllPodcastFiles
         {
             get
             {
                 return @"C:\MP3s\music\distorted_circuitry";
+            }
+        }
+
+        public List<string> FilterTitlesOn
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 

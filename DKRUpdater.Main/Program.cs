@@ -23,7 +23,7 @@ namespace DKRUpdater.Main
 
             UpdatePlaylistsWithPlacedFiles(downloadedPodcastFilesToProcess);
 
-            Logger.Log("Completed processing all podcasts!");
+            DKRlogger.Log("Completed processing all podcasts!");
         }
 
         private static List<DKRPodcastFileToProcess> GetDownloadedFilesFromPodcasts()
@@ -93,12 +93,12 @@ namespace DKRUpdater.Main
         {
             log4net.Config.BasicConfigurator.Configure();
 
-            Logger.Log("DKRUpdater (version 0.1.12) starting...");
-            Logger.Log("Current time UTC: '{0}'", DateTime.UtcNow.ToString("u"));
-            Logger.Log("--------------------------------------------------------------");
-            Logger.Log("Das Klub Radio Updater - Podcast Retrievel and Placement Task");
-            Logger.Log("Das Klub | 2016");
-            Logger.Log("--------------------------------------------------------------");
+            DKRlogger.Log("DKRUpdater (version 0.1.13) starting...");
+            DKRlogger.Debug("Current time UTC: '{0}'", DateTime.UtcNow.ToString("u"));
+            DKRlogger.Log("--------------------------------------------------------------");
+            DKRlogger.Log("Das Klub Radio Updater - Podcast Retrievel and Placement Task");
+            DKRlogger.Log("Das Klub | 2016");
+            DKRlogger.Log("--------------------------------------------------------------");
         }
     }
 }

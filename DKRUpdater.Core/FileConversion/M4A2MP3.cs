@@ -27,13 +27,13 @@ namespace DKRUpdater.Core
         {
             try
             {
-                Logger.Log(string.Format("Deleting file: '{0}'", filePath));
+                DKRlogger.Log(string.Format("Deleting file: '{0}'", filePath));
                 File.Delete(filePath);
-                Logger.Log(string.Format("Deleted file: '{0}'", filePath));
+                DKRlogger.Log(string.Format("Deleted file: '{0}'", filePath));
             }
             catch (Exception ex)
             {
-                Logger.LogError(string.Format("File '{0}' couldn't be deleted", filePath), ex);
+                DKRlogger.LogError(string.Format("File '{0}' couldn't be deleted", filePath), ex);
             }
         }
 
@@ -41,10 +41,10 @@ namespace DKRUpdater.Core
         {
             if (!File.Exists(fromPath))
             {
-                Logger.LogError(string.Format("File '{0}' doesn't exist", fromPath), new Exception());
+                DKRlogger.LogError(string.Format("File '{0}' doesn't exist", fromPath), new Exception());
             }
 
-            Logger.Log(string.Format("Starting M4A to WAV conversion from: '{0}'", fromPath));
+            DKRlogger.Log(string.Format("Starting M4A to WAV conversion from: '{0}'", fromPath));
 
             var command = ThirdPartyExe + "faad.exe";
             var args = InQuotes(fromPath);
@@ -60,14 +60,14 @@ namespace DKRUpdater.Core
             }
             catch (Exception ex)
             {
-                Logger.LogError(string.Format("Failed M4A to WAV conversion from: '{0}'", fromPath), ex);
+                DKRlogger.LogError(string.Format("Failed M4A to WAV conversion from: '{0}'", fromPath), ex);
             }
             finally
             {
                 process.Dispose();
             }
 
-            Logger.Log(string.Format("Completed M4A to WAV conversion from: '{0}'", fromPath));
+            DKRlogger.Log(string.Format("Completed M4A to WAV conversion from: '{0}'", fromPath));
 
             return fromPath.Replace(".m4a", ".wav");
         }
@@ -76,10 +76,10 @@ namespace DKRUpdater.Core
         {
             if (!File.Exists(fromPathWav))
             {
-                Logger.LogError(string.Format("File '{0}' doesn't exist", fromPathWav), new Exception());
+                DKRlogger.LogError(string.Format("File '{0}' doesn't exist", fromPathWav), new Exception());
             }
 
-            Logger.Log(string.Format("Starting conversion to MP3 from: '{0}' to: '{1}'", fromPathWav, toPathMp3));
+            DKRlogger.Log(string.Format("Starting conversion to MP3 from: '{0}' to: '{1}'", fromPathWav, toPathMp3));
 
             string command = ThirdPartyExe + "lame.exe ";
             string args = string.Format(" -V2 --cbr -b 192 {0} {1}", InQuotes(fromPathWav), InQuotes(toPathMp3));
@@ -95,14 +95,14 @@ namespace DKRUpdater.Core
             }
             catch (Exception ex)
             {
-                Logger.LogError(string.Format("Failed conversion to MP3 from: '{0}' to: '{1}'", fromPathWav, toPathMp3), ex);
+                DKRlogger.LogError(string.Format("Failed conversion to MP3 from: '{0}' to: '{1}'", fromPathWav, toPathMp3), ex);
             }
             finally
             {
                 process.Dispose();
             }
 
-            Logger.Log(string.Format("Completed conversion to MP3 from: '{0}' to: '{1}'", fromPathWav, toPathMp3));
+            DKRlogger.Log(string.Format("Completed conversion to MP3 from: '{0}' to: '{1}'", fromPathWav, toPathMp3));
         }
 
         private static string InQuotes(string withoutQuotes)

@@ -10,13 +10,13 @@ namespace DKRUpdater.Core.FileSystem
         {
             var di = new DirectoryInfo(directory);
 
-            Logger.Log(string.Format("Deleting all files in: '{0}'", directory));
+            DKRlogger.Log(string.Format("Deleting all files in: '{0}'", directory));
 
             try
             {
                 foreach (FileInfo file in di.GetFiles())
                 {
-                    Logger.Log(string.Format("Deleting file: '{0}'", file.Name));
+                    DKRlogger.Log(string.Format("Deleting file: '{0}'", file.Name));
 
                     file.Delete();
                 }
@@ -28,10 +28,10 @@ namespace DKRUpdater.Core.FileSystem
             }
             catch (Exception ex)
             {
-                Logger.LogError(string.Format("Failed to delete all content in: '{0}'", directory), ex);
+                DKRlogger.LogError(string.Format("Failed to delete all content in: '{0}'", directory), ex);
             }
 
-            Logger.Log(string.Format("Completed deleting all files in: '{0}'", directory));
+            DKRlogger.Log(string.Format("Completed deleting all files in: '{0}'", directory));
         }
 
 
@@ -39,7 +39,7 @@ namespace DKRUpdater.Core.FileSystem
         {
             try
             {
-                Logger.Log(string.Format("Moving file: '{0}' to: '{1}'", fromPath, toPath));
+                DKRlogger.Log(string.Format("Moving file: '{0}' to: '{1}'", fromPath, toPath));
 
                 new FileInfo(toPath).Directory.Create();
 
@@ -47,7 +47,7 @@ namespace DKRUpdater.Core.FileSystem
             }
             catch (Exception ex)
             {
-                Logger.LogError(string.Format("Error moving file: '{0}' to: '{1}'", fromPath, toPath), ex);
+                DKRlogger.LogError(string.Format("Error moving file: '{0}' to: '{1}'", fromPath, toPath), ex);
             }
         }
     }

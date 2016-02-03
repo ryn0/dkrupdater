@@ -9,13 +9,21 @@ using DKRUpdater.Feeds.Podcasts.BaseRss;
 
 namespace DKRUpdater.Feeds.Services
 {
-    public class OontzCastService : IPodcastRetriever
+    public class OontzCastService : IRetrievablePodcast
     {
         public string DestinationDirectoryOfAllPodcastFiles
         {
             get
             {
                 return @"C:\MP3s\music\oontzcast";
+            }
+        }
+
+        public List<string> FilterTitlesOn
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 

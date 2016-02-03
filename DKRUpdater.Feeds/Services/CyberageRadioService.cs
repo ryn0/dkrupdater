@@ -9,13 +9,21 @@ using DKRUpdater.Feeds.Podcasts.BaseRss;
 
 namespace DKRUpdater.Feeds.Services
 {
-    public class CyberageRadioService : IPodcastRetriever
+    public class CyberageRadioService : IRetrievablePodcast
     {
         public string DestinationDirectoryOfAllPodcastFiles
         {
             get
             {
                 return @"C:\MP3s\music\cyberageradio";
+            }
+        }
+
+        public List<string> FilterTitlesOn
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 

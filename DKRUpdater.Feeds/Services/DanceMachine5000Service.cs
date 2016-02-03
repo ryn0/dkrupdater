@@ -9,13 +9,21 @@ using DKRUpdater.Feeds.Podcasts.BaseRss;
 
 namespace DKRUpdater.Feeds.Services
 {
-    public class DanceMachine5000Service : IPodcastRetriever
+    public class DanceMachine5000Service : IRetrievablePodcast
     {
         public string DestinationDirectoryOfAllPodcastFiles
         {
             get
             {
                 return @"C:\MP3s\music\dancemachine5000";
+            }
+        }
+
+        public List<string> FilterTitlesOn
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 

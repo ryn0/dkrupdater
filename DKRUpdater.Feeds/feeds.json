@@ -1,0 +1,28 @@
+{
+  "feeds": [
+    {
+      "feedId": 1,
+      "maxFeedsToDownload": 5,
+      "podcastUrl": "http://www.cyberage.cx/cybercast.php",
+      "targetPlaylistPaths": [
+        "C:\\MP3s\\playlist\\cyberage.pls",
+        "C:\\MP3s\\playlist\\newmusic.pls"
+      ],
+      "filterTitlesOn": [
+        "industrial"
+      ]
+    },
+    {
+      "feedId": 2,
+      "maxFeedsToDownload": 5,
+      "podcastUrl": "http://www.cyberage.cx/cybercast.php",
+      "targetPlaylistPaths": [
+        "C:\\MP3s\\playlist\\cyberage.pls",
+        "C:\\MP3s\\playlist\\newmusic.pls"
+      ],
+      "filterTitlesOn": [
+        "industrial"
+      ]
+    }
+  ]
+}

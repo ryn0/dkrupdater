@@ -7,6 +7,7 @@ using DKRUpdater.Feeds.Podcasts.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DKRUpdater.Feeds.Podcasts.BaseRss;
 
 namespace DKRUpdater.Feeds.Utilities
 {
@@ -20,22 +21,25 @@ namespace DKRUpdater.Feeds.Utilities
             int maxNewToDownload = IntConstants.MaxNewToDownload,
             List<string> filterOnTitles = null) where T : IRss
         {
-            Logger.Log("Starting processing of podcasts for: '{0}'", podcastFeedOrigin);
+            DKRlogger.Debug("Starting processing of podcasts for: '{0}'", podcastFeedOrigin);
 
             var rssFeed = DownloadClient.DownloadUrlContentIntoModel<T>(PodcastUri);
 
             var podcastFilesToProcess = new List<DKRPodcastFileToProcess>();
             
-            Logger.Log("A maximum of: '{0}' files will be downloaded from: '{1}'", maxNewToDownload, PodcastUri);
+            DKRlogger.Debug("A maximum of: '{0}' files will be downloaded from: '{1}'", maxNewToDownload, PodcastUri);
 
-            var podcastsToProcess = rssFeed.Channel.Item.OrderByDescending(x => Convert.ToDateTime(x.PubDate))
-                                                        .Take(maxNewToDownload);
+            var podcastItems = rssFeed.Channel.Item;
+
+            DKRlogger.Debug("A total of: '{0}' podcasts were found on this feed.", podcastItems.Count());
+
+            var filteredPodcats = FilterPodcasts(podcastItems, filterOnTitles);
+
+            var podcastsToProcess = filteredPodcats.OrderByDescending(x => Convert.ToDateTime(x.PubDate))
+                                                   .Take(maxNewToDownload);
 
             foreach (var podcastFile in podcastsToProcess)
             {                
-                if (!IsAllowedPodcast(podcastFile.Title, filterOnTitles))
-                    continue;
-
                 var podcastFileUrl = new Uri(podcastFile.Enclosure.Url);
                 var releaseDateOfPodcast = Convert.ToDateTime(podcastFile.PubDate);
 
@@ -69,9 +73,28 @@ namespace DKRUpdater.Feeds.Utilities
                 podcastFilesToProcess.Add(podcastFileToProcess);
             }
 
-            Logger.Log("Completed processing of podcasts for: '{0}'", podcastFeedOrigin);
+            DKRlogger.Debug("Completed processing of podcasts for: '{0}'", podcastFeedOrigin);
 
             return podcastFilesToProcess;
+        }
+
+        private static List<Item> FilterPodcasts(List<Item> podcasts, List<string> filterOnTitles)
+        {
+            if (IsMissingFilters(filterOnTitles))
+            {
+                return podcasts;
+            }
+
+            var result = from p in podcasts
+                     where filterOnTitles.Any(val => p.Title.Contains(val))
+                     select p;
+
+            return result.ToList();
+        }
+
+        private static bool IsMissingFilters(List<string> filterOnTitles)
+        {
+            return filterOnTitles == null || filterOnTitles.Count() <= 0;
         }
 
         private static bool IsAllowedPodcast(string title, List<string> filterOnTitles)

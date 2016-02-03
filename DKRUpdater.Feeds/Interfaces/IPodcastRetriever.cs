@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DKRUpdater.Feeds.Interfaces
 {
-    public interface IPodcastRetriever
+    public interface IRetrievablePodcast
     {
         Uri PodcastUri { get; }
 
@@ -16,6 +16,9 @@ namespace DKRUpdater.Feeds.Interfaces
         string DestinationDirectoryOfAllPodcastFiles { get; }
 
         List<string> PlaylistPathsToIncludeIn { get; }
+
+        List<string> FilterTitlesOn { get; }
+        
 
         List<DKRPodcastFileToProcess> GetPodcastFilesForProcessing();
     }

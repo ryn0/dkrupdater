@@ -9,13 +9,21 @@ using DKRUpdater.Feeds.Podcasts.BaseRss;
 
 namespace DKRUpdater.Feeds.Services
 {
-    public class TheRequiemService : IPodcastRetriever
+    public class TheRequiemService : IRetrievablePodcast
     {
         public string DestinationDirectoryOfAllPodcastFiles
         {
             get
             {
                 return @"C:\MP3s\music\therequiem";
+            }
+        }
+
+        public List<string> FilterTitlesOn
+        {
+            get
+            {
+                return Filters();
             }
         }
 

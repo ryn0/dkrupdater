@@ -38,6 +38,10 @@
       <HintPath>..\packages\MoreLinq.Portable.1.4.0\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\MoreLinq.Portable.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,8 +54,8 @@
   <ItemGroup>
     <Compile Include="Constants\IntConstants.cs" />
     <Compile Include="Constants\StringConstants.cs" />
-    <Compile Include="DKRModels\DKRPodcastSource.cs" />
     <Compile Include="DKRModels\DKRPodcastToProcess.cs" />
+    <Compile Include="DKRModels\FeedModel.cs" />
     <Compile Include="Interfaces\IPodcastRetriever.cs" />
     <Compile Include="Podcasts\BaseRss\Category.cs" />
     <Compile Include="Podcasts\BaseRss\Channel.cs" />
@@ -76,6 +80,7 @@
     <Compile Include="Utilities\PodcastFileProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="feeds.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +88,14 @@
       <Project>{96d9eb5a-aaef-4f4e-a6a5-c8aa557cf9ec}</Project>
       <Name>DKRUpdater.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="faad.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lame.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
