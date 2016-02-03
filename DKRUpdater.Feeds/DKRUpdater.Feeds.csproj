@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\IntConstants.cs" />
     <Compile Include="Constants\StringConstants.cs" />
     <Compile Include="DKRModels\DKRPodcastSource.cs" />
     <Compile Include="DKRModels\DKRPodcastToProcess.cs" />

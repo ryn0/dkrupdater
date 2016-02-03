@@ -19,6 +19,14 @@ namespace DKRUpdater.Feeds.Services
             }
         }
 
+        public int MaxToDownload
+        {
+            get
+            {
+                return 50;
+            }
+        }
+
         public List<string> PlaylistPathsToIncludeIn
         {
             get
@@ -54,7 +62,8 @@ namespace DKRUpdater.Feeds.Services
                                                                     PodcastUri,
                                                                     PodcastFeedOrigin,
                                                                     DestinationDirectoryOfAllPodcastFiles,
-                                                                    PlaylistPathsToIncludeIn);
+                                                                    PlaylistPathsToIncludeIn,
+                                                                    MaxToDownload);
 
             return podcastFilesToProcess;
         } 

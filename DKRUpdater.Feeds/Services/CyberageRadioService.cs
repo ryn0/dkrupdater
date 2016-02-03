@@ -19,6 +19,14 @@ namespace DKRUpdater.Feeds.Services
             }
         }
 
+        public int MaxToDownload
+        {
+            get
+            {
+                return 5;
+            }
+        }
+
         public List<string> PlaylistPathsToIncludeIn
         {
             get
@@ -53,8 +61,9 @@ namespace DKRUpdater.Feeds.Services
             var podcastFilesToProcess = PodcastFileProcessor.BuildPodcastFilesForPlaylists<RssRootBase>(
                                                                     PodcastUri,
                                                                     PodcastFeedOrigin,
-                                                                    DestinationDirectoryOfAllPodcastFiles,
-                                                                    PlaylistPathsToIncludeIn);
+                                                                    DestinationDirectoryOfAllPodcastFiles,                                                                 
+                                                                    PlaylistPathsToIncludeIn,
+                                                                    MaxToDownload);
 
             return podcastFilesToProcess;
         }

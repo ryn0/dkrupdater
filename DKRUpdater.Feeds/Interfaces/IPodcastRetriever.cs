@@ -9,6 +9,8 @@ namespace DKRUpdater.Feeds.Interfaces
     {
         Uri PodcastUri { get; }
 
+        int MaxToDownload { get; }
+
         PodcastFeedOrigin PodcastFeedOrigin { get; }
 
         string DestinationDirectoryOfAllPodcastFiles { get; }

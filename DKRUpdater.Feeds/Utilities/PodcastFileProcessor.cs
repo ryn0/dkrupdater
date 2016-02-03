@@ -1,6 +1,7 @@
 using DKRUpdater.Core.Enums;
 using DKRUpdater.Core.Logging;
 using DKRUpdater.Core.Web;
+using DKRUpdater.Feeds.Constants;
 using DKRUpdater.Feeds.DKRModels;
 using DKRUpdater.Feeds.Podcasts.Interfaces;
 using System;
@@ -15,6 +16,7 @@ namespace DKRUpdater.Feeds.Utilities
             PodcastFeedOrigin podcastFeedOrigin,
             string destinationDirectoryOfAllPodcastFiles,            
             List<string> playlistPathsToIncludeIn,
+            int maxToDownload = IntConstants.MaxToDownload,
             List<string> filterOnTitles = null) where T : IRss
         {
             Logger.Log(string.Format("Starting processing of podcasts for: '{0}'", podcastFeedOrigin));
@@ -29,9 +31,14 @@ namespace DKRUpdater.Feeds.Utilities
 
             Logger.Log(string.Format("There are: '{0}' files to download for: '{1}'", amountToDownload, podcastFeedOrigin));
 
+            int quantityDownloaded = 0;
+
             // then do each
             foreach (var podcastFile in rssFeed.Channel.Item)
             {
+                if (quantityDownloaded >= maxToDownload)
+                    break;
+
                 if (!IsAllowedPodcast(podcastFile.Title, filterOnTitles))
                     continue;
 
@@ -66,6 +73,8 @@ namespace DKRUpdater.Feeds.Utilities
                                                                             destinationDirectoryOfAllPodcastFiles);
 
                 podcastFilesToProcess.Add(podcastFileToProcess);
+
+                quantityDownloaded++;
             }
 
             Logger.Log(string.Format("Completed processing of podcasts for: '{0}'", podcastFeedOrigin));
