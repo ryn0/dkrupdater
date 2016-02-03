@@ -6,6 +6,7 @@ using DKRUpdater.Feeds.DKRModels;
 using DKRUpdater.Feeds.Podcasts.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DKRUpdater.Feeds.Utilities
 {
@@ -16,31 +17,29 @@ namespace DKRUpdater.Feeds.Utilities
             PodcastFeedOrigin podcastFeedOrigin,
             string destinationDirectoryOfAllPodcastFiles,            
             List<string> playlistPathsToIncludeIn,
-            int maxToDownload = IntConstants.MaxToDownload,
+            int maxNewToDownload = IntConstants.MaxNewToDownload,
             List<string> filterOnTitles = null) where T : IRss
         {
-            Logger.Log(string.Format("Starting processing of podcasts for: '{0}'", podcastFeedOrigin));
+            Logger.Log("Starting processing of podcasts for: '{0}'", podcastFeedOrigin);
 
             var rssFeed = DownloadClient.DownloadUrlContentIntoModel<T>(PodcastUri);
 
             var podcastFilesToProcess = new List<DKRPodcastFileToProcess>();
 
             // get the amount to do first
-            var amountToDownload = GetTotalCountToDownloadForPodcast(
+            var totalPossibleToDownload = GetTotalCountToDownloadForPodcast(
                     podcastFeedOrigin, destinationDirectoryOfAllPodcastFiles, filterOnTitles, rssFeed);
 
-            Logger.Log(string.Format("There are: '{0}' files to download for: '{1}'", amountToDownload, podcastFeedOrigin));
+            Logger.Log("There are: '{0}' files that could be downloaded for: '{1}'", totalPossibleToDownload, podcastFeedOrigin);
 
-            Logger.Log(string.Format("A maximum of: '{0}' files will be downloaded from: '{1}'", maxToDownload, PodcastUri));
+            Logger.Log("A maximum of: '{0}' files will be downloaded from: '{1}'", maxNewToDownload, PodcastUri);
 
-            int quantityDownloaded = 0;
+            var podcastsToProcess = rssFeed.Channel.Item.OrderByDescending(x => x.PubDate)
+                                                        .Take(maxNewToDownload);
 
             // then do each
-            foreach (var podcastFile in rssFeed.Channel.Item)
-            {
-                if (quantityDownloaded >= maxToDownload)
-                    break;
-
+            foreach (var podcastFile in podcastsToProcess)
+            {                
                 if (!IsAllowedPodcast(podcastFile.Title, filterOnTitles))
                     continue;
 
@@ -75,11 +74,9 @@ namespace DKRUpdater.Feeds.Utilities
                                                                             destinationDirectoryOfAllPodcastFiles);
 
                 podcastFilesToProcess.Add(podcastFileToProcess);
-
-                quantityDownloaded++;
             }
 
-            Logger.Log(string.Format("Completed processing of podcasts for: '{0}'", podcastFeedOrigin));
+            Logger.Log("Completed processing of podcasts for: '{0}'", podcastFeedOrigin);
 
             return podcastFilesToProcess;
         }

@@ -19,7 +19,7 @@ namespace DKRUpdater.Feeds.Services
             }
         }
 
-        public int MaxToDownload
+        public int MaxNewToDownload
         {
             get
             {
@@ -63,7 +63,7 @@ namespace DKRUpdater.Feeds.Services
                                                                     PodcastFeedOrigin,
                                                                     DestinationDirectoryOfAllPodcastFiles,                                                                 
                                                                     PlaylistPathsToIncludeIn,
-                                                                    MaxToDownload);
+                                                                    MaxNewToDownload);
 
             return podcastFilesToProcess;
         }

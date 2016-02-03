@@ -9,7 +9,7 @@ namespace DKRUpdater.Feeds.Interfaces
     {
         Uri PodcastUri { get; }
 
-        int MaxToDownload { get; }
+        int MaxNewToDownload { get; }
 
         PodcastFeedOrigin PodcastFeedOrigin { get; }
 
