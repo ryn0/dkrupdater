@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DKRUpdater.Feeds.Podcasts.BaseRss;
 using DKRUpdater.Feeds.Interfaces;
+using System.Text;
 
 namespace DKRUpdater.Feeds.Utilities
 {
@@ -32,19 +33,18 @@ namespace DKRUpdater.Feeds.Utilities
             int maxNewToDownload = IntConstants.MaxNewToDownload,
             List<string> filterOnTitles = null) where T : IRss
         {
+            Log.Debug("-----------------------------------------------------");
             Log.Debug("Starting processing of podcasts for feed id: '{0}'...", feedId);
 
             var rssFeed = DownloadClient.DownloadUrlContentIntoModel<T>(PodcastUri);
 
-            var podcastFilesToProcess = new List<DKRPodcastFileToProcess>();
-            
-            Log.Debug("A maximum of: '{0}' files will be downloaded from: '{1}'.", maxNewToDownload, PodcastUri);
-
             var podcastItems = rssFeed.Channel.Item;
 
             Log.Debug("A total of: '{0}' podcasts were found on this feed.", podcastItems.Count());
-
+            Log.Debug("A maximum of: '{0}' files will be downloaded from: '{1}'.", maxNewToDownload, PodcastUri);
             Log.Debug("Filtering podcasts...");
+
+            var podcastFilesToProcess = new List<DKRPodcastFileToProcess>();
 
             var filteredPodcats = FilterPodcasts(podcastItems, filterOnTitles);
 
@@ -90,7 +90,7 @@ namespace DKRUpdater.Feeds.Utilities
                 podcastFilesToProcess.Add(podcastFileToProcess);
             }
 
-            Log.Debug("Completed processing of podcasts for: '{0}'.", feedId);
+            Log.Debug("Completed processing of podcasts for feed id: '{0}'.", feedId);
 
             return podcastFilesToProcess;
         }
@@ -101,6 +101,16 @@ namespace DKRUpdater.Feeds.Utilities
             {
                 return podcasts;
             }
+
+            var filters = new StringBuilder();
+
+            foreach(var title in filterOnTitles)
+            {
+                filters.AppendFormat("{0}|", title);
+            }
+
+            Log.Debug("Filtering on: '{0}'", filters.ToString());
+
 
             var result = from p in podcasts
                          where filterOnTitles.Any(val => p.Title.ToLower()

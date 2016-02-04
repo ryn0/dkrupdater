@@ -1,6 +1,7 @@
 using DKRUpdater.Core;
 using DKRUpdater.Core.Conventions;
 using DKRUpdater.Core.FileConversion;
+using DKRUpdater.Core.Logging;
 using DKRUpdater.Feeds.Constants;
 using System;
 using System.IO;
@@ -58,6 +59,8 @@ namespace DKRUpdater.Feeds.Utilities
             var path = string.Format(@"{0}\{1}",
                             destinationDirectoryOfAllPodcastFiles,
                             fileToDownload);
+
+            Log.Debug("Checking if destination file at: '{0}' exists...", path);
 
             return File.Exists(path);
         }

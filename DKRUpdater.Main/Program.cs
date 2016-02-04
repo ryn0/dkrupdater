@@ -19,9 +19,7 @@ namespace DKRUpdater.Main
             InitializeLogger();
 
             var podcastFeeds = GetPodcastFeeds();
-
-            Console.ReadKey();
-
+            
             var downloadedPodcastFilesToProcess = GetDownloadedFilesFromPodcasts(podcastFeeds);
 
             PutPodcastFilesInDesinationDirectories(downloadedPodcastFilesToProcess);
@@ -33,11 +31,16 @@ namespace DKRUpdater.Main
 
         private static List<IRetrievablePodcast> GetPodcastFeeds()
         {
+            var pathToFeedFile = string.Format(@"{0}\feeds.json", Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));
+
             // todo: create service that will read in the file, validate the properties, throwing errors and showing messages if needed
             // validate that the feed ids are unique, that all types are correct; that MaxFeedsToDownload is non-negative; that target playlists are .pls files; 
             // trim all strings and the filters on the commas
 
-            throw new NotImplementedException();
+            var feedReaderService = new FeedReaderService();
+            var feeds = feedReaderService.GetFeeds(pathToFeedFile);
+
+            return feeds;
         }
 
         private static List<DKRPodcastFileToProcess> GetDownloadedFilesFromPodcasts(List<IRetrievablePodcast> podcasts)

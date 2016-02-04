@@ -3,27 +3,74 @@
     {
       "feedId": 1,
       "maxFeedsToDownload": 5,
-      "podcastUrl": "http://www.cyberage.cx/cybercast.php",
-      "destinationDirectory": "C:\\MP3s\\music\\cyberageradio\\",
+      "podcastUrl": "http://dancemachine5000.com/feed/",
+      "destinationDirectory": "C:\\MP3s\\music\\dancemachine5000",
       "targetPlaylistPaths": [
-        "C:\\MP3s\\playlist\\cyberage.pls",
+        "C:\\MP3s\\playlist\\dancemachine5000.pls",
         "C:\\MP3s\\playlist\\newmusic.pls"
-      ],
-      "filterTitlesOn": [
-        "industrial"
       ]
     },
     {
       "feedId": 2,
       "maxFeedsToDownload": 5,
+      "podcastUrl": "http://www.darkhorizonsradio.com/podcasts/shows/Dark_Horizons.xml",
+      "destinationDirectory": "C:\\MP3s\\music\\Dark_Horizons",
+      "targetPlaylistPaths": [
+        "C:\\MP3s\\playlist\\newmusic.pls"
+      ]
+    },
+    {
+      "feedId": 3,
+      "maxFeedsToDownload": 5,
+      "podcastUrl": "http://oontzcast.podbean.com/feed/",
+      "destinationDirectory": "C:\\MP3s\\music\\oontzcast",
+      "targetPlaylistPaths": [
+        "C:\\MP3s\\playlist\\newmusic.pls",
+        "C:\\MP3s\\playlist\\oontzcast.pls"
+      ]
+    },
+    {
+      "feedId": 4,
+      "maxFeedsToDownload": 5,
+      "podcastUrl": "http://therequiem.libsyn.com/rss",
+      "destinationDirectory": "C:\\MP3s\\music\\therequiem",
+      "targetPlaylistPaths": [
+        "C:\\MP3s\\playlist\\newmusic.pls",
+        "C:\\MP3s\\playlist\\generalpodcasts.pls"
+      ],
+      "filterTitlesOn": [
+        "DJ Depraved",
+        "Dark Industrial Frequencies"
+      ]
+    },
+    {
+      "feedId": 5,
+      "maxFeedsToDownload": 5,
+      "podcastUrl": "http://feeds.feedburner.com/RadioBlastFurnace",
+      "destinationDirectory": "C:\\MP3s\\music\\radioblastfurnace",
+      "targetPlaylistPaths": [
+        "C:\\MP3s\\playlist\\radioblastfurnance.pls",
+        "C:\\MP3s\\playlist\\newmusic.pls"
+      ]
+    },
+    {
+      "feedId": 6,
+      "maxFeedsToDownload": 5,
+      "podcastUrl": "http://feeds.feedburner.com/djrazorgrrl?format=xml",
+      "destinationDirectory": "C:\\MP3s\\music\\distorted_circuitry",
+      "targetPlaylistPaths": [
+        "C:\\MP3s\\playlist\\distorted_circuitry.pls",
+        "C:\\MP3s\\playlist\\newmusic.pls"
+      ]
+    },
+    {
+      "feedId": 7,
+      "maxFeedsToDownload": 5,
       "podcastUrl": "http://www.cyberage.cx/cybercast.php",
-      "destinationDirectory": "C:\\MP3s\\music\\cyberageradio\\",
+      "destinationDirectory": "C:\\MP3s\\music\\cyberageradio",
       "targetPlaylistPaths": [
         "C:\\MP3s\\playlist\\cyberage.pls",
         "C:\\MP3s\\playlist\\newmusic.pls"
-      ],
-      "filterTitlesOn": [
-        "industrial"
       ]
     }
   ]
