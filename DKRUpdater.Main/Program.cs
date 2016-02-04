@@ -2,64 +2,59 @@ using DKRUpdater.Core.FileSystem;
 using DKRUpdater.Core.Logging;
 using DKRUpdater.Feeds.Constants;
 using DKRUpdater.Feeds.DKRModels;
+using DKRUpdater.Feeds.Interfaces;
 using DKRUpdater.Feeds.Services;
 using DKRUpdater.Playlists;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace DKRUpdater.Main
 {
-    // todo: consider havinga maximum from a provider the weekly podcasts
     class Program
     {
         static void Main(string[] args)
         {
             InitializeLogger();
 
-            var downloadedPodcastFilesToProcess = GetDownloadedFilesFromPodcasts();
+            var podcastFeeds = GetPodcastFeeds();
+
+            Console.ReadKey();
+
+            var downloadedPodcastFilesToProcess = GetDownloadedFilesFromPodcasts(podcastFeeds);
 
             PutPodcastFilesInDesinationDirectories(downloadedPodcastFilesToProcess);
 
             UpdatePlaylistsWithPlacedFiles(downloadedPodcastFilesToProcess);
 
-            DKRlogger.Log("Completed processing all podcasts!");
+            Log.Debug("Completed processing all podcasts!");
         }
 
-        private static List<DKRPodcastFileToProcess> GetDownloadedFilesFromPodcasts()
+        private static List<IRetrievablePodcast> GetPodcastFeeds()
         {
-            // delete everything first, there might have been a problem
+            // todo: create service that will read in the file, validate the properties, throwing errors and showing messages if needed
+            // validate that the feed ids are unique, that all types are correct; that MaxFeedsToDownload is non-negative; that target playlists are .pls files; 
+            // trim all strings and the filters on the commas
+
+            throw new NotImplementedException();
+        }
+
+        private static List<DKRPodcastFileToProcess> GetDownloadedFilesFromPodcasts(List<IRetrievablePodcast> podcasts)
+        {
+            // clean the diretory of any partially downloaded files
             FileOperations.DeleteAllFilesInDirectory(StringConstants.Mp3DownloadDirectory);
 
-            var downloadedPodcastsToProcess = new List<DKRPodcastFileToProcess>();
+            var feedRetrievalService = new FeedRetrievalService();
 
-            var danceMachine5000Service = new DanceMachine5000Service();
-            downloadedPodcastsToProcess.AddRange(danceMachine5000Service.GetPodcastFilesForProcessing());
-
-            var darkHorizonsService = new DarkHorizonsService();
-            downloadedPodcastsToProcess.AddRange(darkHorizonsService.GetPodcastFilesForProcessing());
-
-            var oontzCastService = new OontzCastService();
-            downloadedPodcastsToProcess.AddRange(oontzCastService.GetPodcastFilesForProcessing());
-
-            var theRequiemService = new TheRequiemService();
-            downloadedPodcastsToProcess.AddRange(theRequiemService.GetPodcastFilesForProcessing());
-
-            var radioBlastFurnanceService = new RadioBlastFurnanceService();
-            downloadedPodcastsToProcess.AddRange(radioBlastFurnanceService.GetPodcastFilesForProcessing());
-
-            var djRazorGrrlService = new DjRazorGrrlService();
-            downloadedPodcastsToProcess.AddRange(djRazorGrrlService.GetPodcastFilesForProcessing());
-
-            var cyberageRadioService = new CyberageRadioService();
-            downloadedPodcastsToProcess.AddRange(cyberageRadioService.GetPodcastFilesForProcessing());
-
+            var downloadedPodcastsToProcess = feedRetrievalService.GetPodcastFilesForProcessing(podcasts);
+            
             return downloadedPodcastsToProcess;
         }
 
-        private static void PutPodcastFilesInDesinationDirectories(List<DKRPodcastFileToProcess> downloadedPodcastFilesToProcess)
+        private static void PutPodcastFilesInDesinationDirectories(List<DKRPodcastFileToProcess> downloadedPodcasts)
         {
-            foreach (var podcastFile in downloadedPodcastFilesToProcess)
+            foreach (var podcastFile in downloadedPodcasts)
             {
                 var fromPath = podcastFile.PathToDownloadedMp3;
                 var toPath = podcastFile.DestinationPathForMp3;
@@ -68,17 +63,17 @@ namespace DKRUpdater.Main
             }
         }
 
-        private static void UpdatePlaylistsWithPlacedFiles(List<DKRPodcastFileToProcess> downloadedPodcastFilesToProcess)
+        private static void UpdatePlaylistsWithPlacedFiles(List<DKRPodcastFileToProcess> downloadedPodcasts)
         {
-            var distinctPlaylists = downloadedPodcastFilesToProcess.SelectMany(item => item.PlaylistPathsToIncludeIn)
-                                                                   .Distinct()
-                                                                   .ToList();
+            var distinctPlaylists = downloadedPodcasts.SelectMany(item => item.PlaylistPathsToIncludeIn)
+                                                      .Distinct()
+                                                      .ToList();
            
             // wsh: foreach playlist, get the mp3s that belong on it, read the current playlist, add them if they aren't there
             foreach(var playlist in distinctPlaylists)
             {
-                var mp3sForPlaylist = downloadedPodcastFilesToProcess.Where(file => file.PlaylistPathsToIncludeIn.Contains(playlist))
-                                                                     .ToList();
+                var mp3sForPlaylist = downloadedPodcasts.Where(file => file.PlaylistPathsToIncludeIn.Contains(playlist))
+                                                                                                    .ToList();
 
                 AddMp3sToPlaylist(playlist, mp3sForPlaylist);
             }
@@ -93,12 +88,13 @@ namespace DKRUpdater.Main
         {
             log4net.Config.BasicConfigurator.Configure();
 
-            DKRlogger.Log("DKRUpdater (version 0.1.13) starting...");
-            DKRlogger.Debug("Current time UTC: '{0}'", DateTime.UtcNow.ToString("u"));
-            DKRlogger.Log("--------------------------------------------------------------");
-            DKRlogger.Log("Das Klub Radio Updater - Podcast Retrievel and Placement Task");
-            DKRlogger.Log("Das Klub | 2016");
-            DKRlogger.Log("--------------------------------------------------------------");
+            Log.Debug("DKRUpdater (version 0.2.0) starting...");
+            Log.Debug("Current time UTC: '{0}'", DateTime.UtcNow.ToString("u"));
+            Log.Debug("Current directory is: '{0}'", Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));
+            Log.Debug("--------------------------------------------------------------");
+            Log.Debug("Das Klub Radio Updater - Podcast Retrievel and Placement Task");
+            Log.Debug("Das Klub | 2016");
+            Log.Debug("--------------------------------------------------------------");
         }
     }
 }

@@ -1,4 +1,3 @@
-using DKRUpdater.Core.Enums;
 using DKRUpdater.Core.Logging;
 using DKRUpdater.Core.Web;
 using DKRUpdater.Feeds.Constants;
@@ -8,35 +7,51 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DKRUpdater.Feeds.Podcasts.BaseRss;
+using DKRUpdater.Feeds.Interfaces;
 
 namespace DKRUpdater.Feeds.Utilities
 {
     public class PodcastFileProcessor
     {
-        public static List<DKRPodcastFileToProcess> BuildPodcastFilesForPlaylists<T>(
+        public List<DKRPodcastFileToProcess> BuildPodcastFilesForPlaylists<T>(IRetrievablePodcast podcast) where T : IRss
+        {
+            return BuildPodcastFilesForPlaylists<RssRootBase>(
+                    podcast.PodcastUrl,
+                    podcast.FeedId,
+                    podcast.DestinationDirectory,
+                    podcast.TargetPlaylistPaths,
+                    podcast.MaxFeedsToDownload,
+                    podcast.FilterTitlesOn);
+        }
+
+        private List<DKRPodcastFileToProcess> BuildPodcastFilesForPlaylists<T>(
             Uri PodcastUri,
-            PodcastFeedOrigin podcastFeedOrigin,
+            int feedId,
             string destinationDirectoryOfAllPodcastFiles,            
             List<string> playlistPathsToIncludeIn,
             int maxNewToDownload = IntConstants.MaxNewToDownload,
             List<string> filterOnTitles = null) where T : IRss
         {
-            DKRlogger.Debug("Starting processing of podcasts for: '{0}'", podcastFeedOrigin);
+            Log.Debug("Starting processing of podcasts for feed id: '{0}'...", feedId);
 
             var rssFeed = DownloadClient.DownloadUrlContentIntoModel<T>(PodcastUri);
 
             var podcastFilesToProcess = new List<DKRPodcastFileToProcess>();
             
-            DKRlogger.Debug("A maximum of: '{0}' files will be downloaded from: '{1}'", maxNewToDownload, PodcastUri);
+            Log.Debug("A maximum of: '{0}' files will be downloaded from: '{1}'.", maxNewToDownload, PodcastUri);
 
             var podcastItems = rssFeed.Channel.Item;
 
-            DKRlogger.Debug("A total of: '{0}' podcasts were found on this feed.", podcastItems.Count());
+            Log.Debug("A total of: '{0}' podcasts were found on this feed.", podcastItems.Count());
+
+            Log.Debug("Filtering podcasts...");
 
             var filteredPodcats = FilterPodcasts(podcastItems, filterOnTitles);
 
             var podcastsToProcess = filteredPodcats.OrderByDescending(x => Convert.ToDateTime(x.PubDate))
                                                    .Take(maxNewToDownload);
+
+            Log.Debug("A total of: '{0}' podcasts will be checked.", podcastsToProcess.Count());
 
             foreach (var podcastFile in podcastsToProcess)
             {                
@@ -46,9 +61,10 @@ namespace DKRUpdater.Feeds.Utilities
                 if (PathHelper.PodcastExists(
                                         podcastFileUrl,
                                         releaseDateOfPodcast,
-                                        podcastFeedOrigin,
+                                        feedId,
                                         destinationDirectoryOfAllPodcastFiles))
                 {
+                    Log.Debug("Podcast at: '{0}' already exists in the destination.", podcastFileUrl);
                     continue;
                 }
 
@@ -58,10 +74,11 @@ namespace DKRUpdater.Feeds.Utilities
                     PlaylistPathsToIncludeIn = playlistPathsToIncludeIn
                 };
 
-                var downloadedFilePath = PathHelper.DownloadFilePath(podcastFileUrl, releaseDateOfPodcast, podcastFeedOrigin);
+                var downloadedFilePath = PathHelper.DownloadFilePath(podcastFileUrl, releaseDateOfPodcast, feedId);
 
                 if (!DownloadClient.DownloadFile(podcastFileUrl, downloadedFilePath))
                 {
+                    Log.Debug("Skipping file at: '{0}' which could not be downloaded.", podcastFileUrl);
                     continue;
                 }
 
@@ -73,12 +90,12 @@ namespace DKRUpdater.Feeds.Utilities
                 podcastFilesToProcess.Add(podcastFileToProcess);
             }
 
-            DKRlogger.Debug("Completed processing of podcasts for: '{0}'", podcastFeedOrigin);
+            Log.Debug("Completed processing of podcasts for: '{0}'.", feedId);
 
             return podcastFilesToProcess;
         }
 
-        private static List<Item> FilterPodcasts(List<Item> podcasts, List<string> filterOnTitles)
+        private List<Item> FilterPodcasts(List<Item> podcasts, List<string> filterOnTitles)
         {
             if (IsMissingFilters(filterOnTitles))
             {
@@ -86,29 +103,16 @@ namespace DKRUpdater.Feeds.Utilities
             }
 
             var result = from p in podcasts
-                     where filterOnTitles.Any(val => p.Title.Contains(val))
-                     select p;
+                         where filterOnTitles.Any(val => p.Title.ToLower()
+                                                                .Contains(val.ToLower()))
+                         select p;
 
             return result.ToList();
         }
 
-        private static bool IsMissingFilters(List<string> filterOnTitles)
+        private bool IsMissingFilters(List<string> filterOnTitles)
         {
             return filterOnTitles == null || filterOnTitles.Count() <= 0;
-        }
-
-        private static bool IsAllowedPodcast(string title, List<string> filterOnTitles)
-        {
-            if (filterOnTitles == null || filterOnTitles.Count == 0)
-                return true;
-
-            foreach(var allowedTitle in filterOnTitles)
-            {
-                if (title.ToLower().Contains(allowedTitle.ToLower()))
-                    return true;
-            }
-
-            return false;
         }
     }
 }

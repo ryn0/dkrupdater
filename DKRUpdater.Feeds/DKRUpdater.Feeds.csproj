@@ -56,12 +56,16 @@
     <Compile Include="Constants\StringConstants.cs" />
     <Compile Include="DKRModels\DKRPodcastToProcess.cs" />
     <Compile Include="DKRModels\FeedModel.cs" />
-    <Compile Include="Interfaces\IPodcastRetriever.cs" />
+    <Compile Include="Interfaces\IFeedReaderService.cs" />
+    <Compile Include="Interfaces\IFeedValidationService.cs" />
+    <Compile Include="Interfaces\IRetrievablePodcast.cs" />
     <Compile Include="Podcasts\BaseRss\Category.cs" />
     <Compile Include="Podcasts\BaseRss\Channel.cs" />
     <Compile Include="Interfaces\IRss.cs" />
     <Compile Include="Podcasts\BaseRss\RssRootBase.cs" />
     <Compile Include="Services\CyberageRadioService.cs" />
+    <Compile Include="Services\FeedRetrievalService.cs" />
+    <Compile Include="Interfaces\IFeedRetrievalService.cs" />
     <Compile Include="Services\RadioBlastFurnanceService.cs" />
     <Compile Include="Services\DanceMachine5000Service.cs" />
     <Compile Include="Podcasts\BaseRss\Enclosure.cs" />

@@ -29,7 +29,7 @@ Version=2";
         {
             if (!File.Exists(path))
             {
-                DKRlogger.LogError(string.Format("Cannot find file to get seconds: '{0}'", path), new Exception());
+                Log.Error(string.Format("Cannot find file to get seconds: '{0}'", path), new Exception());
 
                 return 0;
             }
@@ -45,7 +45,7 @@ Version=2";
         {
             if (!File.Exists(playlistPath))
             {
-                DKRlogger.LogError(string.Format("Cannot find existing playlist at: '{0}'", playlistPath), new Exception());
+                Log.Error(string.Format("Cannot find existing playlist at: '{0}'", playlistPath), new Exception());
 
                 CreateDefaultPlaylist(playlistPath);
             }
@@ -60,12 +60,12 @@ Version=2";
             }
             catch (Exception ex)
             {
-                DKRlogger.LogError(string.Format("Cannot read playlist at: '{0}'", playlistPath), ex);
+                Log.Error(string.Format("Cannot read playlist at: '{0}'", playlistPath), ex);
             }
 
             try
             {
-                DKRlogger.Debug("Starting iterating lines in existing playlist: '{0}'...", playlistPath);
+                Log.Debug("Starting iterating lines in existing playlist: '{0}'...", playlistPath);
 
                 for (int i = 1; i < content.Length - 3; i = i + 3)
                 {
@@ -81,11 +81,11 @@ Version=2";
                     playlist.Add(mp3InPlaylist);
                 }
 
-                DKRlogger.Log(string.Format("Completed iterating lines in existing playlist: '{0}'", playlistPath));
+                Log.Debug(string.Format("Completed iterating lines in existing playlist: '{0}'", playlistPath));
             }
             catch (Exception ex)
             {
-                DKRlogger.LogError(string.Format("Error reading playlist file: '{0}'", playlistPath), ex);
+                Log.Error(string.Format("Error reading playlist file: '{0}'", playlistPath), ex);
             }
 
             return playlist;
@@ -110,7 +110,7 @@ NumberOfEntries=1
 Version=2";
             try
             {
-                DKRlogger.Log(string.Format("Creating new playlist at: '{0}'", playlistPath));
+                Log.Debug(string.Format("Creating new playlist at: '{0}'", playlistPath));
 
                 using (var sw = File.CreateText(playlistPath))
                 {
@@ -119,10 +119,10 @@ Version=2";
             }
             catch (Exception ex)
             {
-                DKRlogger.LogError(string.Format("Cannot create new playlist file: '{0}'", playlistPath), ex);
+                Log.Error(string.Format("Cannot create new playlist file: '{0}'", playlistPath), ex);
             }
 
-            DKRlogger.Debug("Completed creating playlist at: '{0}'", playlistPath);
+            Log.Debug("Completed creating playlist at: '{0}'", playlistPath);
         }
 
         private static PlaylistFile GetPlaylistFileFromPlaylistLine(string file, string title, string length)
@@ -135,7 +135,7 @@ Version=2";
 
             if (!int.TryParse(lengthToUse, out lengthInSeconds))
             {
-                DKRlogger.LogError(string.Format("Value '{0}' is not an int", lengthToUse), new Exception());
+                Log.Error(string.Format("Value '{0}' is not an int", lengthToUse), new Exception());
             }
 
             var playlistFile = new PlaylistFile()
@@ -152,7 +152,7 @@ Version=2";
         {
             var existingPlaylist = GetPlaylist(pathToPlaylist);
 
-            DKRlogger.Log(string.Format("Started writing new playlist to: '{0}'", pathToPlaylist));
+            Log.Debug(string.Format("Started writing new playlist to: '{0}'", pathToPlaylist));
             
             var newPlaylist = IsNewMusicPlaylist(pathToPlaylist) ?
                                    CreateNewMusicPlaylist(mp3sForPlaylist, existingPlaylist) :
@@ -166,10 +166,10 @@ Version=2";
             }
             catch (Exception ex)
             {
-                DKRlogger.LogError(string.Format("Failed to write playlist to: '{0}'", pathToPlaylist), ex);
+                Log.Error(string.Format("Failed to write playlist to: '{0}'", pathToPlaylist), ex);
             }
 
-            DKRlogger.Debug("Completed writing new playlist to: '{0}'", pathToPlaylist);
+            Log.Debug("Completed writing new playlist to: '{0}'", pathToPlaylist);
         }
 
         private static List<PlaylistFile> CreateNewMusicPlaylist(

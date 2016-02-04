@@ -20,7 +20,7 @@ namespace DKRUpdater.Core.Web
 
         public static bool DownloadFile(Uri uri, string destinationFilePath)
         {
-            DKRlogger.Log(string.Format("Starting download of file at: '{0}' to: '{1}'", uri, destinationFilePath));
+            Log.Debug(string.Format("Starting download of file at: '{0}' to: '{1}'", uri, destinationFilePath));
 
             try
             {
@@ -31,19 +31,19 @@ namespace DKRUpdater.Core.Web
             }
             catch (Exception ex)
             {
-                DKRlogger.LogError(string.Format("Failed to download file '{0}'", uri), ex);
+                Log.Error(string.Format("Failed to download file '{0}'", uri), ex);
 
                 return false;
             }
 
-            DKRlogger.Log(string.Format("Completed download of file at: '{0}' to: '{1}'", uri, destinationFilePath));
+            Log.Debug(string.Format("Completed download of file at: '{0}' to: '{1}'", uri, destinationFilePath));
 
             return true;
         }
 
         private static string GetcontentString(Uri uri)
         {
-            DKRlogger.Log(string.Format("Starting download string file at: '{0}'", uri));
+            Log.Debug(string.Format("Starting download string file at: '{0}'", uri));
 
             var content = string.Empty;
 
@@ -59,17 +59,17 @@ namespace DKRUpdater.Core.Web
             }
             catch (Exception ex)
             {
-                DKRlogger.LogError(string.Format("Failed to download string at: '{0}'", uri), ex);
+                Log.Error(string.Format("Failed to download string at: '{0}'", uri), ex);
             }
 
-            DKRlogger.Log(string.Format("Completed download of URL content as string: '{0}'", uri));
+            Log.Debug(string.Format("Completed download of URL content as string: '{0}'", uri));
 
             return content;
         }
 
         private static T ConvertToModel<T>(string content)
         {
-            DKRlogger.Log(string.Format("Starting deserialization of model content..."));
+            Log.Debug(string.Format("Starting deserialization of model content..."));
 
             T deserializedModel = default(T);
 
@@ -81,10 +81,10 @@ namespace DKRUpdater.Core.Web
             }
             catch (Exception ex)
             {
-                DKRlogger.LogError(string.Format("Failed to deserialize string: '{0}'", content), ex);
+                Log.Error(string.Format("Failed to deserialize string: '{0}'", content), ex);
             }
 
-            DKRlogger.Log(string.Format("Completed model deserialization."));
+            Log.Debug(string.Format("Completed model deserialization."));
 
             return deserializedModel;
         }

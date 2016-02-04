@@ -1,6 +1,5 @@
 using DKRUpdater.Core;
 using DKRUpdater.Core.Conventions;
-using DKRUpdater.Core.Enums;
 using DKRUpdater.Core.FileConversion;
 using DKRUpdater.Feeds.Constants;
 using System;
@@ -34,11 +33,11 @@ namespace DKRUpdater.Feeds.Utilities
         public static string DownloadFilePath(
             Uri podcastFileUrl,
             DateTime releaseDateOfPodcast,
-            PodcastFeedOrigin podcastFeedOrigin)
+            int feedId)
         {
             var path = string.Format(@"{0}\{1}",
                 StringConstants.Mp3DownloadDirectory,
-                FilenameConventions.DownloadFilenameFormatter(podcastFileUrl, podcastFeedOrigin, releaseDateOfPodcast));
+                FilenameConventions.DownloadFilenameFormatter(podcastFileUrl, feedId, releaseDateOfPodcast));
 
             return path;
         }
@@ -46,10 +45,10 @@ namespace DKRUpdater.Feeds.Utilities
         public static bool PodcastExists
             (Uri podcastFileUrl,
             DateTime releaseDateOfPodcast,
-            PodcastFeedOrigin podcastFeedOrigin,
+            int feedId,
             string destinationDirectoryOfAllPodcastFiles)
         {
-            var fileToDownload = FilenameConventions.DownloadFilenameFormatter(podcastFileUrl, podcastFeedOrigin, releaseDateOfPodcast);
+            var fileToDownload = FilenameConventions.DownloadFilenameFormatter(podcastFileUrl, feedId, releaseDateOfPodcast);
 
             if (FileHelper.IsFileM4a(fileToDownload))
             {

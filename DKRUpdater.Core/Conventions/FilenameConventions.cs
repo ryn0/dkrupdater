@@ -8,7 +8,7 @@ namespace DKRUpdater.Core.Conventions
     {
         public static string DownloadFilenameFormatter(
                 Uri uriOfFile, 
-                PodcastFeedOrigin feedOrigin,
+                int feedId,
                 DateTime podcastPublishDate)
         {            
             var format = "{0}_{1}_{2}";
@@ -18,11 +18,9 @@ namespace DKRUpdater.Core.Conventions
                                 "-" +
                                 podcastPublishDate.Day.ToString("00");
 
-            var originFormatted = ((int)feedOrigin).ToString();
-
             var fileNameFromUrl = UrlParsing.GetFileNameFromUrl(uriOfFile);
 
-            var fileName = string.Format(format, dateFormatted, originFormatted, fileNameFromUrl);
+            var fileName = string.Format(format, dateFormatted, feedId, fileNameFromUrl);
 
             return fileName;
         }

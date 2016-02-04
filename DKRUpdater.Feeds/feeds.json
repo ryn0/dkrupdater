@@ -4,6 +4,7 @@
       "feedId": 1,
       "maxFeedsToDownload": 5,
       "podcastUrl": "http://www.cyberage.cx/cybercast.php",
+      "destinationDirectory": "C:\\MP3s\\music\\cyberageradio\\",
       "targetPlaylistPaths": [
         "C:\\MP3s\\playlist\\cyberage.pls",
         "C:\\MP3s\\playlist\\newmusic.pls"
@@ -16,6 +17,7 @@
       "feedId": 2,
       "maxFeedsToDownload": 5,
       "podcastUrl": "http://www.cyberage.cx/cybercast.php",
+      "destinationDirectory": "C:\\MP3s\\music\\cyberageradio\\",
       "targetPlaylistPaths": [
         "C:\\MP3s\\playlist\\cyberage.pls",
         "C:\\MP3s\\playlist\\newmusic.pls"

@@ -1,34 +1,33 @@
+using DKRUpdater.Feeds.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DKRUpdater.Feeds.DKRModels
 {
-
-    public class Feed
+    public class Feed : IRetrievablePodcast
     {
         [JsonProperty(PropertyName = "feedId")]
-        public int FeedId { get; set; }
+        public int FeedId { get; private set; }
 
         [JsonProperty(PropertyName = "maxFeedsToDownload")]
-        public int MaxFeedsToDownload { get; set; }
+        public int MaxFeedsToDownload { get; private set; }
 
         [JsonProperty(PropertyName = "podcastUrl")]
-        public string PodcastUrl { get; set; }
+        public Uri PodcastUrl { get; private set; }
 
         [JsonProperty(PropertyName = "targetPlaylistPaths")]
-        public List<string> TargetPlaylistPaths { get; set; }
+        public List<string> TargetPlaylistPaths { get; private set; }
 
         [JsonProperty(PropertyName = "filterTitlesOn")]
-        public List<string> FilterTitlesOn { get; set; }
+        public List<string> FilterTitlesOn { get; private set; }
 
+        [JsonProperty(PropertyName = "destinationDirectory")]
+        public string DestinationDirectory { get; private set; }
     }
 
     [JsonObject]
-    public class FeedModel
+    public class RssFeed
     {
         [JsonProperty(PropertyName = "feeds")]
         public List<Feed> Feeds { get; set; }

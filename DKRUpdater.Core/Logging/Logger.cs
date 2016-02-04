@@ -2,11 +2,11 @@ using System;
 
 namespace DKRUpdater.Core.Logging
 {
-    public class DKRlogger
+    public class Log
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static void Log(string message)
+        public static void Debug(string message)
         {
             log.Debug(message);
         }
@@ -16,7 +16,7 @@ namespace DKRUpdater.Core.Logging
             log.Debug(string.Format(format, args));
         }
 
-        public static void LogError(string message, Exception ex)
+        public static void Error(string message, Exception ex)
         {
             log.Error(message, ex);
         }
