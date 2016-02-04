@@ -44,11 +44,11 @@ namespace DKRUpdater.Feeds.Services
 
             try
             {
-                Log.Debug("Starting deserialization of content of file at: '{0}'...", path);
+                Log.Debug("Starting deserialization of content from file at: '{0}'...", path);
 
                 downloadedableFeeds = JsonConvert.DeserializeObject<RssFeed>(json);
 
-                Log.Debug("Completed deserialization of content of file at: '{0}'.", path);
+                Log.Debug("Completed deserialization of content from file at: '{0}'.", path);
 
 
             }

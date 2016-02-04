@@ -1,4 +1,3 @@
-using DKRUpdater.Core.Enums;
 using DKRUpdater.Core.StringParsing;
 using System;
 

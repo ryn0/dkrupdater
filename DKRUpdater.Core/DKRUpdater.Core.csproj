@@ -53,7 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conventions\FilenameConventions.cs" />
-    <Compile Include="Enums\PodcastFeedOrigin.cs" />
     <Compile Include="FileConversion\FileHelper.cs" />
     <Compile Include="FileConversion\M4A2MP3.cs" />
     <Compile Include="FileSystem\FileOperations.cs" />

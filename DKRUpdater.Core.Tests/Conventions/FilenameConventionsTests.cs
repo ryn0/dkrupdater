@@ -1,5 +1,4 @@
 using DKRUpdater.Core.Conventions;
-using DKRUpdater.Core.Enums;
 using System;
 using Xunit;
 
