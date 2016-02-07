@@ -69,7 +69,16 @@
       "podcastUrl": "http://www.cyberage.cx/cybercast.php",
       "destinationDirectory": "C:\\MP3s\\music\\cyberageradio",
       "targetPlaylistPaths": [
-        "C:\\MP3s\\playlist\\cyberage.pls",
+        "C:\\MP3s\\playlist\\newmusic.pls",
+        "C:\\MP3s\\playlist\\generalpodcasts.pls"
+      ]
+    },
+    {
+      "feedId": 8,
+      "maxFeedsToDownload": 2,
+      "podcastUrl": "http://spaceradiousa.com/Space_Radio/Space_Radio/rss.xml",
+      "destinationDirectory": "C:\\MP3s\\music\\Space_Radio",
+      "targetPlaylistPaths": [
         "C:\\MP3s\\playlist\\newmusic.pls"
       ]
     }
