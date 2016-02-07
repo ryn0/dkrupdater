@@ -19,5 +19,18 @@ namespace DKRUpdater.Core.Tests
             // assert
             Assert.Equal(expectedDate, date);
         }
+
+        [Fact]
+        public void CleanFileName()
+        {
+            // arrange
+            var fileName = @"2016-01-17_8_2016: GOTH, INDUSTRIAL, EBM, SYNTHPOP, ELECTRONIC, TECHNO.mp3";
+
+            // act
+            var clearnFileName = FileNameParsing.CleanFileName(fileName);
+
+            // assert
+            Assert.Equal(@"2016-01-17_8_2016 GOTH, INDUSTRIAL, EBM, SYNTHPOP, ELECTRONIC, TECHNO.mp3", clearnFileName);
+        }
     }
 }

@@ -19,7 +19,9 @@ namespace DKRUpdater.Core.Conventions
 
             var fileNameFromUrl = UrlParsing.GetFileNameFromUrl(uriOfFile);
 
-            var fileName = string.Format(format, dateFormatted, feedId, fileNameFromUrl);
+            var cleanedFileName = FileNameParsing.CleanFileName(fileNameFromUrl);
+
+            var fileName = string.Format(format, dateFormatted, feedId, cleanedFileName);
 
             return fileName;
         }

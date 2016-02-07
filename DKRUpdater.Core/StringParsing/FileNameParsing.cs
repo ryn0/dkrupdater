@@ -21,5 +21,16 @@ namespace DKRUpdater.Core.StringParsing
 
             return Convert.ToDateTime(datePart);
         }
+
+        public static string CleanFileName(string fileName)
+        {
+            foreach (char c in Path.GetInvalidFileNameChars())
+            {
+                fileName = fileName.Replace(c, '_');
+            }
+
+            return fileName;
+        }
+
     }
 }
