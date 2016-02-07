@@ -13,12 +13,7 @@ You can run this console application as a scheduled task on Windows Server.
 1. compile the application (or get the .zip)
 	a. if compiling, zip the contents of the main program's debug directory ("dkrupdater\DKRUpdater.Main\bin\Debug")
 2. move the .zip file to the file location where you want it to run from (example: "C:\my_services" on Windows Server 2012R) and extract it
-3. ensure all of the following content paths are created by you for the music and playlists
-	a. "C:\MP3s"
-	b. "C:\MP3s\downloads"
-	c. "C:\MP3s\logs"
-	d. "C:\MP3s\music"
-	e. "C:\MP3s\playlists"
+3. make sure you have a directory called: "C:\MP3s", this is the root directory of where all the files will be downloaded and logged
 4. enable write and modify permissions for "NETWORK SERVICE" and "LOCAL SERVICE" on the "C:\MP3s" folder and folder where you placed the unzipped files
 5. define your feeds.json file in the root of the application
 5. create a scheduled task to run "DKRUpdater.Main.exe" (Task Scheduler MMC can schedule tasks, open from the command prompt with: "Taskschd.msc")

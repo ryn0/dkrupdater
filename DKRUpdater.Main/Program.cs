@@ -1,6 +1,6 @@
+using DKRUpdater.Core.Constants;
 using DKRUpdater.Core.FileSystem;
 using DKRUpdater.Core.Logging;
-using DKRUpdater.Feeds.Constants;
 using DKRUpdater.Feeds.DKRModels;
 using DKRUpdater.Feeds.Interfaces;
 using DKRUpdater.Feeds.Services;
@@ -18,6 +18,8 @@ namespace DKRUpdater.Main
         {
             InitializeLogger();
 
+            CreateAllRequiredDirectories();
+
             var podcastFeeds = GetPodcastFeeds();
             
             var downloadedPodcastFilesToProcess = GetDownloadedFilesFromPodcasts(podcastFeeds);
@@ -27,6 +29,14 @@ namespace DKRUpdater.Main
             UpdatePlaylistsWithPlacedFiles(downloadedPodcastFilesToProcess);
 
             Log.Debug("Completed processing all podcasts!");
+        }
+
+        private static void CreateAllRequiredDirectories()
+        {
+            Directories.CreateDirectoryIfNotExists(StringConstants.Mp3DownloadDirectory);
+            Directories.CreateDirectoryIfNotExists(StringConstants.Mp3LogsDirectory);
+            Directories.CreateDirectoryIfNotExists(StringConstants.Mp3MusicDirectory);
+            Directories.CreateDirectoryIfNotExists(StringConstants.Mp3PlaylistsDirectory);
         }
 
         private static List<IRetrievablePodcast> GetPodcastFeeds()
@@ -86,6 +96,7 @@ namespace DKRUpdater.Main
         {
             log4net.Config.BasicConfigurator.Configure();
 
+            Log.Debug("++++++++++++++++++++++++++++++++++++++");
             Log.Debug("DKRUpdater (version 0.2.0) starting...");
             Log.Debug("Current time UTC: '{0}'", DateTime.UtcNow.ToString("u"));
             Log.Debug("Current directory is: '{0}'", Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));

@@ -52,9 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\IntConstants.cs" />
+    <Compile Include="Constants\StringConstants.cs" />
     <Compile Include="Conventions\FilenameConventions.cs" />
     <Compile Include="FileConversion\FileHelper.cs" />
     <Compile Include="FileConversion\M4A2MP3.cs" />
+    <Compile Include="FileSystem\Directories.cs" />
     <Compile Include="FileSystem\FileOperations.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

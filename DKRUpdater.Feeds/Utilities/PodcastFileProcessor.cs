@@ -1,6 +1,5 @@
 using DKRUpdater.Core.Logging;
 using DKRUpdater.Core.Web;
-using DKRUpdater.Feeds.Constants;
 using DKRUpdater.Feeds.DKRModels;
 using DKRUpdater.Feeds.Podcasts.Interfaces;
 using System;
@@ -9,6 +8,7 @@ using System.Linq;
 using DKRUpdater.Feeds.Podcasts.BaseRss;
 using DKRUpdater.Feeds.Interfaces;
 using System.Text;
+using DKRUpdater.Core.Constants;
 
 namespace DKRUpdater.Feeds.Utilities
 {

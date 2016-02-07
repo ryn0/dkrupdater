@@ -1,4 +1,4 @@
-namespace DKRUpdater.Feeds.Constants
+namespace DKRUpdater.Core.Constants
 {
     public class IntConstants
     {

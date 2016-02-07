@@ -1,6 +1,6 @@
+using DKRUpdater.Core.Constants;
 using DKRUpdater.Core.Logging;
 using DKRUpdater.Core.StringParsing;
-using DKRUpdater.Feeds.Constants;
 using DKRUpdater.Feeds.DKRModels;
 using DKRUpdater.Playlists.Models;
 using MoreLinq;
