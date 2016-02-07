@@ -31,7 +31,7 @@ namespace DKRUpdater.Core.Web
             }
             catch (Exception ex)
             {
-                Log.Error(string.Format("Failed to download file '{0}'", uri), ex);
+                Log.Error(string.Format("Failed: to download file '{0}'", uri), ex);
 
                 return false;
             }
