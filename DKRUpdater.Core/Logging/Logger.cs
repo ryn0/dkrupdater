@@ -20,5 +20,10 @@ namespace DKRUpdater.Core.Logging
         {
             log.Error(message, ex);
         }
+
+        public static void Error(Exception ex)
+        {
+            log.Error(ex.ToString(), ex);
+        }
     }
 }

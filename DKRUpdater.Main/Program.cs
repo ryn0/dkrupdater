@@ -5,6 +5,7 @@ using DKRUpdater.Feeds.DKRModels;
 using DKRUpdater.Feeds.Interfaces;
 using DKRUpdater.Feeds.Services;
 using DKRUpdater.Playlists;
+using DKRUpdater.Playlists.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,7 +27,9 @@ namespace DKRUpdater.Main
 
             PutPodcastFilesInDesinationDirectories(downloadedPodcastFilesToProcess);
 
-            UpdatePlaylistsWithPlacedFiles(downloadedPodcastFilesToProcess);
+            var playlistConfiguration = PlaylistConfigs.BuildFromConfigs();
+
+            UpdatePlaylistsWithPlacedFiles(downloadedPodcastFilesToProcess, playlistConfiguration);
 
             Log.Debug("Completed processing all podcasts!");
         }
@@ -71,7 +74,9 @@ namespace DKRUpdater.Main
             }
         }
 
-        private static void UpdatePlaylistsWithPlacedFiles(List<DKRPodcastFileToProcess> downloadedPodcasts)
+        private static void UpdatePlaylistsWithPlacedFiles(
+            List<DKRPodcastFileToProcess> downloadedPodcasts, 
+            PlaylistConfigs playlistConfigs)
         {
             var distinctPlaylists = downloadedPodcasts.SelectMany(item => item.PlaylistPathsToIncludeIn)
                                                       .Distinct()
@@ -83,13 +88,16 @@ namespace DKRUpdater.Main
                 var mp3sForPlaylist = downloadedPodcasts.Where(file => file.PlaylistPathsToIncludeIn.Contains(playlist))
                                                                                                     .ToList();
 
-                AddMp3sToPlaylist(playlist, mp3sForPlaylist);
+                AddMp3sToPlaylist(playlist, mp3sForPlaylist, playlistConfigs.MaxInNewMusicPlaylist);
             }
         }
-
-        private static void AddMp3sToPlaylist(string playlist, List<DKRPodcastFileToProcess> mp3sForPlaylist)
+        
+        private static void AddMp3sToPlaylist(
+            string playlist, 
+            List<DKRPodcastFileToProcess> mp3sForPlaylist, 
+            int maxInNewMusicPlaylist)
         {
-            PlaylistHelper.WriteNewPlaylist(playlist, mp3sForPlaylist);
+            PlaylistHelper.WriteNewPlaylist(playlist, mp3sForPlaylist, maxInNewMusicPlaylist);
         }
 
         private static void InitializeLogger()

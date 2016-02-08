@@ -1,3 +1,4 @@
+using DKRUpdater.Core.FileSystem;
 using DKRUpdater.Core.Logging;
 using DKRUpdater.Feeds.DKRModels;
 using DKRUpdater.Feeds.Interfaces;
@@ -25,7 +26,7 @@ namespace DKRUpdater.Feeds.Services
                 throw new Exception(message);
             }
 
-            var json = GetJsonFromPath(path);
+            var json = FileOperations.GetJsonFromPath(path);
             var downloadedableFeeds = GetDownloadableFeeds(path, json);
 
             var feedValidationService = new FeedValidationService();
@@ -68,23 +69,7 @@ namespace DKRUpdater.Feeds.Services
             return ConvertToRetrievablePodcastList(downloadedableFeeds.Feeds);
         }
 
-        private static string GetJsonFromPath(string path)
-        {
-            var json = string.Empty;
 
-            try
-            {
-                Log.Debug("Reading file: '{0}'", path);
-
-                json = File.ReadAllText(path);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(string.Format("Failed to read file at: '{0}'", path), ex);
-            }
-
-            return json;
-        }
 
         private List<IRetrievablePodcast> ConvertToRetrievablePodcastList(List<Feed> feeds)
         {

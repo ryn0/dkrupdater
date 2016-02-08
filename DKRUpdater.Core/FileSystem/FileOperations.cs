@@ -34,6 +34,23 @@ namespace DKRUpdater.Core.FileSystem
             Log.Debug("Completed deleting all files in: '{0}'", directory);
         }
 
+        public static string GetJsonFromPath(string path)
+        {
+            var json = string.Empty;
+
+            try
+            {
+                Log.Debug("Reading file: '{0}'", path);
+
+                json = File.ReadAllText(path);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(string.Format("Failed to read file at: '{0}'", path), ex);
+            }
+
+            return json;
+        }
 
         public static void MoveFile(string fromPath, string toPath)
         {

@@ -14,7 +14,6 @@ namespace DKRUpdater.Playlists
 {
     public class PlaylistHelper
     {
-        const int MaxFilesInNewMusicPlaylist = 12;
         const string FileKey = "File";
         const string TitleKey = "Title";
         const string LengthKey = "Length"; 
@@ -125,6 +124,11 @@ Version=2";
             Log.Debug("Completed creating playlist at: '{0}'", playlistPath);
         }
 
+        public static void WriteNewPlaylist(string playlist, List<DKRPodcastFileToProcess> mp3sForPlaylist)
+        {
+            WriteNewPlaylist(playlist, mp3sForPlaylist);
+        }
+
         private static PlaylistFile GetPlaylistFileFromPlaylistLine(string file, string title, string length)
         {
             var fileToUse = file.Split('=')[1];
@@ -148,14 +152,14 @@ Version=2";
             return playlistFile;
         }
 
-        public static void WriteNewPlaylist(string pathToPlaylist, List<DKRPodcastFileToProcess> mp3sForPlaylist)
+        public static void WriteNewPlaylist(string pathToPlaylist, List<DKRPodcastFileToProcess> mp3sForPlaylist, int maxFilesInNewMusicPlaylist)
         {
             var existingPlaylist = GetPlaylist(pathToPlaylist);
 
             Log.Debug(string.Format("Started writing new playlist to: '{0}'", pathToPlaylist));
             
             var newPlaylist = IsNewMusicPlaylist(pathToPlaylist) ?
-                                   CreateNewMusicPlaylist(mp3sForPlaylist, existingPlaylist) :
+                                   CreateNewMusicPlaylist(mp3sForPlaylist, existingPlaylist, maxFilesInNewMusicPlaylist) :
                                    CreateStandardPlaylist(mp3sForPlaylist, existingPlaylist);
 
             var playlistTextFile = GetPlaylistFilesStringForPlaylist(newPlaylist);
@@ -174,7 +178,8 @@ Version=2";
 
         private static List<PlaylistFile> CreateNewMusicPlaylist(
             List<DKRPodcastFileToProcess> mp3sForPlaylist, 
-            List<PlaylistFile> existingPlaylist)
+            List<PlaylistFile> existingPlaylist,
+            int maxFilesInNewMusicPlaylist)
         {
             var datedExistingPlaylist = GetExistingPlaylistWithDates(existingPlaylist);
             var datedNewPlaylist = GetNewPlaylistWithDates(mp3sForPlaylist);
@@ -186,7 +191,7 @@ Version=2";
 
             var mostRecentFiles = possiblePlaylistFiles.DistinctBy(file => file.File)
                                                        .OrderByDescending(file => file.PublishDate)
-                                                       .Take(MaxFilesInNewMusicPlaylist);
+                                                       .Take(maxFilesInNewMusicPlaylist);
 
             var newPlaylist = new List<PlaylistFile>();
 
