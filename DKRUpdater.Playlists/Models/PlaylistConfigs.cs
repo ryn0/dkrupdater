@@ -34,10 +34,7 @@ namespace DKRUpdater.Playlists.Models
             {
                 Log.Debug("Configs at: '{0}' not found, using defaults.", pathToConfigs);
 
-                return new PlaylistConfigs()
-                {
-                    MaxInNewMusicPlaylist = 12
-                };
+                return ReturnDefault();
             }
 
             Log.Debug("Starting to load playlist configuration from: '{0}'...", pathToConfigs);
@@ -46,7 +43,7 @@ namespace DKRUpdater.Playlists.Models
             {
                 var json = FileOperations.GetJsonFromPath(pathToConfigs);
 
-                Log.Debug("Complted load of playist configs");
+                Log.Debug("Completed load of playist configs.");
 
                 Log.Debug("Starting to deserialize playlist configs...");
 
@@ -63,8 +60,17 @@ namespace DKRUpdater.Playlists.Models
             catch (Exception ex)
             {
                 Log.Error(ex);
-                throw ex;
+
+                return ReturnDefault();
             }
+        }
+
+        private static PlaylistConfigs ReturnDefault()
+        {
+            return new PlaylistConfigs()
+            {
+                MaxInNewMusicPlaylist = 12
+            };
         }
     }
 }
