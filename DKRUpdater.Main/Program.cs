@@ -97,7 +97,7 @@ namespace DKRUpdater.Main
             log4net.Config.BasicConfigurator.Configure();
 
             Log.Debug("++++++++++++++++++++++++++++++++++++++");
-            Log.Debug("DKRUpdater (version 0.2.0) starting...");
+            Log.Debug("DKRUpdater (version 0.2.1) starting...");
             Log.Debug("Current time UTC: '{0}'", DateTime.UtcNow.ToString("u"));
             Log.Debug("Current directory is: '{0}'", Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));
             Log.Debug("--------------------------------------------------------------");
