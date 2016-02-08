@@ -82,6 +82,9 @@
     <None Include="App.config" />
     <None Include="DKRUpdater.Main_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <None Include="readme.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DKRUpdater.Core\DKRUpdater.Core.csproj">
