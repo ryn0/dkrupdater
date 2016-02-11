@@ -79,7 +79,8 @@
       "podcastUrl": "http://spaceradiousa.com/Space_Radio/Space_Radio/rss.xml",
       "destinationDirectory": "C:\\MP3s\\music\\Space_Radio",
       "targetPlaylistPaths": [
-        "C:\\MP3s\\playlist\\newmusic.pls"
+        "C:\\MP3s\\playlist\\newmusic.pls",
+        "C:\\MP3s\\playlist\\generalpodcasts.pls"
       ]
     }
   ]
