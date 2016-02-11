@@ -2,7 +2,7 @@
   "feeds": [
     {
       "feedId": 1,
-      "maxFeedsToDownload": 5,
+      "maxFilesToDownload": 5,
       "podcastUrl": "http://dancemachine5000.com/feed/",
       "destinationDirectory": "C:\\MP3s\\music\\dancemachine5000",
       "targetPlaylistPaths": [
@@ -12,7 +12,7 @@
     },
     {
       "feedId": 2,
-      "maxFeedsToDownload": 5,
+      "maxFilesToDownload": 5,
       "podcastUrl": "http://www.darkhorizonsradio.com/podcasts/shows/Dark_Horizons.xml",
       "destinationDirectory": "C:\\MP3s\\music\\Dark_Horizons",
       "targetPlaylistPaths": [
@@ -21,7 +21,7 @@
     },
     {
       "feedId": 3,
-      "maxFeedsToDownload": 5,
+      "maxFilesToDownload": 5,
       "podcastUrl": "http://oontzcast.podbean.com/feed/",
       "destinationDirectory": "C:\\MP3s\\music\\oontzcast",
       "targetPlaylistPaths": [
@@ -31,7 +31,7 @@
     },
     {
       "feedId": 4,
-      "maxFeedsToDownload": 5,
+      "maxFilesToDownload": 5,
       "podcastUrl": "http://therequiem.libsyn.com/rss",
       "destinationDirectory": "C:\\MP3s\\music\\therequiem",
       "targetPlaylistPaths": [
@@ -45,7 +45,7 @@
     },
     {
       "feedId": 5,
-      "maxFeedsToDownload": 5,
+      "maxFilesToDownload": 5,
       "podcastUrl": "http://feeds.feedburner.com/RadioBlastFurnace",
       "destinationDirectory": "C:\\MP3s\\music\\radioblastfurnace",
       "targetPlaylistPaths": [
@@ -55,7 +55,7 @@
     },
     {
       "feedId": 6,
-      "maxFeedsToDownload": 5,
+      "maxFilesToDownload": 5,
       "podcastUrl": "http://feeds.feedburner.com/djrazorgrrl?format=xml",
       "destinationDirectory": "C:\\MP3s\\music\\distorted_circuitry",
       "targetPlaylistPaths": [
@@ -65,7 +65,7 @@
     },
     {
       "feedId": 7,
-      "maxFeedsToDownload": 5,
+      "maxFilesToDownload": 5,
       "podcastUrl": "http://www.cyberage.cx/cybercast.php",
       "destinationDirectory": "C:\\MP3s\\music\\cyberageradio",
       "targetPlaylistPaths": [
@@ -75,7 +75,7 @@
     },
     {
       "feedId": 8,
-      "maxFeedsToDownload": 2,
+      "maxFilesToDownload": 5,
       "podcastUrl": "http://spaceradiousa.com/Space_Radio/Space_Radio/rss.xml",
       "destinationDirectory": "C:\\MP3s\\music\\Space_Radio",
       "targetPlaylistPaths": [

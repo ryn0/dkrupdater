@@ -10,8 +10,8 @@ namespace DKRUpdater.Feeds.DKRModels
         [JsonProperty(PropertyName = "feedId")]
         public int FeedId { get;  set; }
 
-        [JsonProperty(PropertyName = "maxFeedsToDownload")]
-        public int MaxFeedsToDownload { get;  set; }
+        [JsonProperty(PropertyName = "maxFilesToDownload")]
+        public int MaxFilesToDownload { get;  set; }
 
         [JsonProperty(PropertyName = "podcastUrl")]
         public Uri PodcastUrl { get;  set; }

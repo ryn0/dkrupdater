@@ -21,7 +21,7 @@ namespace DKRUpdater.Feeds.Utilities
                     podcast.FeedId,
                     podcast.DestinationDirectory,
                     podcast.TargetPlaylistPaths,
-                    podcast.MaxFeedsToDownload,
+                    podcast.MaxFilesToDownload,
                     podcast.FilterTitlesOn);
         }
 

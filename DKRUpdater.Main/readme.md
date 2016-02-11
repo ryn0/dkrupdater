@@ -34,7 +34,7 @@ Example feed to pull:
   "feeds": [
     {
       "feedId": 1,
-      "maxFeedsToDownload": 5,
+      "maxFilesToDownload": 5,
       "podcastUrl": "http://dancemachine5000.com/feed/",
       "destinationDirectory": "C:\\MP3s\\music\\dancemachine5000",
       "targetPlaylistPaths": [

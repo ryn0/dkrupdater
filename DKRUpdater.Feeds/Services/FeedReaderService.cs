@@ -10,7 +10,7 @@ using System.IO;
 namespace DKRUpdater.Feeds.Services
 {
     // todo: create service that will read in the file, validate the properties, throwing errors and showing messages if needed
-    // validate that the feed ids are unique, that all types are correct; that MaxFeedsToDownload is non-negative; that target playlists are .pls files; 
+    // validate that the feed ids are unique, that all types are correct; that maxFilesToDownload is non-negative; that target playlists are .pls files; 
     // trim all strings and the filters on the commas
 
     public class FeedReaderService : IFeedReaderService
