@@ -24,13 +24,27 @@ namespace DKRUpdater.Core.StringParsing
 
         public static string CleanFileName(string fileName)
         {
+            var maxLengthOfFileName = 75;
+            var extension = Path.GetExtension(fileName);
+            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+            var shortFileNameWithoutExtension = Truncate(fileNameWithoutExtension, maxLengthOfFileName);
+
             foreach (char c in Path.GetInvalidFileNameChars())
             {
-                fileName = fileName.Replace(c, '_');
+                shortFileNameWithoutExtension = shortFileNameWithoutExtension.Replace(c, '_');
             }
 
-            return fileName;
+            return shortFileNameWithoutExtension + extension;
         }
 
+        private static string Truncate(string source, int length)
+        {
+            if (source.Length > length)
+            {
+                source = source.Substring(0, length);
+            }
+
+            return source;
+        }
     }
 }
