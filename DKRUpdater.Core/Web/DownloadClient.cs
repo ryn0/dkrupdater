@@ -69,22 +69,21 @@ namespace DKRUpdater.Core.Web
 
         private static T ConvertToModel<T>(string content)
         {
-            Log.Debug(string.Format("Starting deserialization of model content..."));
-
             T deserializedModel = default(T);
 
             try
             {
+                Log.Debug(string.Format("Starting deserialization of model content..."));
                 var xmlSerializer = new XmlSerializer(typeof(T));
 
                 deserializedModel = (T)xmlSerializer.Deserialize(new StringReader(content));
+                Log.Debug(string.Format("Completed model deserialization."));
+
             }
             catch (Exception ex)
             {
                 Log.Error(string.Format("Failed to deserialize string: '{0}'", content), ex);
             }
-
-            Log.Debug(string.Format("Completed model deserialization."));
 
             return deserializedModel;
         }

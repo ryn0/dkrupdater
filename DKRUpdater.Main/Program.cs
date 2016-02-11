@@ -15,6 +15,8 @@ namespace DKRUpdater.Main
 {
     class Program
     {
+        const string AppVersion = "(v.0.2.3)";
+
         static void Main(string[] args)
         {
             InitializeLogger();
@@ -105,7 +107,7 @@ namespace DKRUpdater.Main
             log4net.Config.BasicConfigurator.Configure();
 
             Log.Debug("++++++++++++++++++++++++++++++++++++++");
-            Log.Debug("DKRUpdater (v.0.2.2) starting...");
+            Log.Debug("DKRUpdater {0} starting...", AppVersion);
             Log.Debug("Current time UTC: '{0}'", DateTime.UtcNow.ToString("u"));
             Log.Debug("Current directory is: '{0}'", Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location));
             Log.Debug("--------------------------------------------------------------");

@@ -38,6 +38,12 @@ namespace DKRUpdater.Feeds.Utilities
 
             var rssFeed = DownloadClient.DownloadUrlContentIntoModel<T>(PodcastUri);
 
+            if (FeedIsEmpty(rssFeed))
+            {
+                Log.Debug("Feed is empty, skipping.");
+                return new List<DKRPodcastFileToProcess>();
+            }
+
             var podcastItems = rssFeed.Channel.Item;
 
             Log.Debug("A total of: '{0}' podcasts were found on this feed.", podcastItems.Count());
@@ -54,7 +60,7 @@ namespace DKRUpdater.Feeds.Utilities
             Log.Debug("A total of: '{0}' podcasts will be checked.", podcastsToProcess.Count());
 
             foreach (var podcastFile in podcastsToProcess)
-            {                
+            {
                 var podcastFileUrl = new Uri(podcastFile.Enclosure.Url);
                 var releaseDateOfPodcast = Convert.ToDateTime(podcastFile.PubDate);
 
@@ -93,6 +99,13 @@ namespace DKRUpdater.Feeds.Utilities
             Log.Debug("Completed processing of podcasts for feed id: '{0}'.", feedId);
 
             return podcastFilesToProcess;
+        }
+
+        private bool FeedIsEmpty<T>(T rssFeed) where T : IRss
+        {
+            return rssFeed == null || 
+                   rssFeed.Channel == null || 
+                   rssFeed.Channel.Item == null;
         }
 
         private List<Item> FilterPodcasts(List<Item> podcasts, List<string> filterOnTitles)

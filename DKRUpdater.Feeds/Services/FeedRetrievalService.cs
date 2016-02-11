@@ -19,10 +19,18 @@ namespace DKRUpdater.Feeds.Services
                 var processablePodcasts =
                     podcastFileProcessor.BuildPodcastFilesForPlaylists<RssRootBase>(podcast);
 
+                if (HasNoPodcasts(processablePodcasts))
+                    continue;
+
                 podcastFilesToProcess.AddRange(processablePodcasts);
             }
 
             return podcastFilesToProcess;
+        }
+
+        private bool HasNoPodcasts(List<DKRPodcastFileToProcess> processablePodcasts)
+        {
+            return processablePodcasts == null || processablePodcasts.Count == 0;
         }
     }
 }
