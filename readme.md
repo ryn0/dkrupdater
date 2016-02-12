@@ -55,7 +55,7 @@ You can listen to Das Klub Radio on mobile devices using the ShoutCast or XiiaLi
 
 You can also listen to Das Klub Radio using Winamp or iTunes by opening a stream to the station. 
 
-Stream URL: http://radio.dasklub.com:8000/listen.pls?sid=1
+Stream URL: http://radio.dasklub.com:8000/DasKlub or http://radio.dasklub.com:8000/listen.pls?sid=1
 
 ---------
 Debugging
