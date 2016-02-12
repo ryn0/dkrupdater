@@ -48,7 +48,6 @@ namespace DKRUpdater.Feeds.Utilities
 
             Log.Debug("A total of: '{0}' podcasts were found on this feed.", podcastItems.Count());
             Log.Debug("A maximum of: '{0}' files will be downloaded from: '{1}'.", maxNewToDownload, PodcastUri);
-            Log.Debug("Filtering podcasts...");
 
             var podcastFilesToProcess = new List<DKRPodcastFileToProcess>();
 
@@ -112,8 +111,11 @@ namespace DKRUpdater.Feeds.Utilities
         {
             if (IsMissingFilters(filterOnTitles))
             {
+                Log.Debug("There are no filters for this podcast.");
                 return podcasts;
             }
+
+            Log.Debug("Filtering podcasts...");
 
             var filters = new StringBuilder();
 

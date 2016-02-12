@@ -1,16 +1,6 @@
 {
   "feeds": [
     {
-      "feedId": 9,
-      "maxFilesToDownload": 2,
-      "podcastUrl": "http://feeds.feedburner.com/IndustrialStrengthNightmaresRadio?format=xml",
-      "destinationDirectory": "C:\\MP3s\\music\\isn",
-      "targetPlaylistPaths": [
-        "C:\\MP3s\\playlist\\newmusic.pls",
-        "C:\\MP3s\\playlist\\generalpodcasts.pls"
-      ]
-    },
-    {
       "feedId": 1,
       "maxFilesToDownload": 1,
       "podcastUrl": "http://dancemachine5000.com/feed/",
