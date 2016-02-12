@@ -97,7 +97,7 @@
       "feedId": 9,
       "maxFilesToDownload": 1,
       "podcastUrl": "http://feeds.feedburner.com/IndustrialStrengthNightmaresRadio?format=xml",
-      "destinationDirectory": "C:\\MP3s\\music\\isn",
+      "destinationDirectory": "C:\\MP3s\\music\\IndustrialStrengthNightmaresRadio",
       "targetPlaylistPaths": [
         "C:\\MP3s\\playlist\\newmusic.pls",
         "C:\\MP3s\\playlist\\generalpodcasts.pls"
