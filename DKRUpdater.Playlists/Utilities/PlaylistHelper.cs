@@ -162,11 +162,24 @@ Version=2";
                                    CreateNewMusicPlaylist(mp3sForPlaylist, existingPlaylist, maxFilesInNewMusicPlaylist) :
                                    CreateStandardPlaylist(mp3sForPlaylist, existingPlaylist);
 
-            var playlistTextFile = GetPlaylistFilesStringForPlaylist(newPlaylist);
-
+            var playlistText = GetPlaylistFilesStringForPlaylist(newPlaylist);
+             
             try
             {
-                File.WriteAllText(pathToPlaylist, playlistTextFile);
+                Log.Debug("Checking if content is different... ");
+
+                var currentFileText = File.ReadAllText(pathToPlaylist);
+
+                if (currentFileText == playlistText)
+                {
+                    Log.Debug("the content is the same.");
+                }
+                else
+                {
+                    Log.Debug("the content is different, writing playlist.");
+                }
+
+                File.WriteAllText(pathToPlaylist, playlistText);
             }
             catch (Exception ex)
             {
