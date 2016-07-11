@@ -60,6 +60,10 @@ namespace DKRUpdater.Feeds.Utilities
 
             foreach (var podcastFile in podcastsToProcess)
             {
+                if (podcastFile.Enclosure == null ||
+                    string.IsNullOrWhiteSpace(podcastFile.Enclosure.Url))
+                    continue;
+
                 var podcastFileUrl = new Uri(podcastFile.Enclosure.Url);
                 var releaseDateOfPodcast = Convert.ToDateTime(podcastFile.PubDate);
 
