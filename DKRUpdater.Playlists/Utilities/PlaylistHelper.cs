@@ -22,7 +22,15 @@ namespace DKRUpdater.Playlists
 @"[playlist]
 {0}
 NumberOfEntries={1}
-Version=2";    
+Version=2";
+
+        const string DefaultContent =
+@"[playlist]
+File1=C:\MP3s\music\station\dk radio 2.mp3
+Title1=dk radio 2
+Length1=5
+NumberOfEntries=1
+Version=2";
 
         public static int SecondsInMp3(string path)
         {
@@ -100,20 +108,14 @@ Version=2";
 
         private static void CreateDefaultPlaylist(string playlistPath)
         {
-            var defaultContent = 
-@"[playlist]
-File1=C:\MP3s\music\station\dk radio 2.mp3
-Title1=dk radio 2
-Length1=5
-NumberOfEntries=1
-Version=2";
+            
             try
             {
                 Log.Debug(string.Format("Creating new playlist at: '{0}'", playlistPath));
 
                 using (var sw = File.CreateText(playlistPath))
                 {
-                    sw.WriteLine(defaultContent);
+                    sw.WriteLine(DefaultContent);
                 }
             }
             catch (Exception ex)
