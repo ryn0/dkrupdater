@@ -23,16 +23,6 @@ namespace DKRUpdater.Main
         {
             InitializeLogger();
 
-            var soundFileHelper = new SoundFileHelper();
-
-            //soundFileHelper.ToTrimmedMp3(@"C:\test\454.mp3");
-            //soundFileHelper.ToTrimmedMp3(@"C:\test\dm5k19.wav");
-            //soundFileHelper.ToTrimmedMp3(@"C:\test\dm5k19.m4a");
-           // soundFileHelper.ToTrimmedMp3(@"C:\test\070316.mp3");
-
-          //  var pl = PlaylistHelper.BitRateInMp3(@"C:\test\070316.mp3");
-        
-//            return;
             CreateAllRequiredDirectories();
 
             var podcastFeeds = GetPodcastFeeds();
