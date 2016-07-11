@@ -36,7 +36,7 @@ Version=2";
             var mp3Track = TagLib.File.Create(path);
 
             var seconds = Convert.ToInt32(Math.Floor(mp3Track.Properties.Duration.TotalSeconds));
-
+ 
             return seconds;
         }
 

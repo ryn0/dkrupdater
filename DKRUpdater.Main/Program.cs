@@ -1,4 +1,6 @@
+using DKRUpdater.Core;
 using DKRUpdater.Core.Constants;
+using DKRUpdater.Core.FileConversion;
 using DKRUpdater.Core.FileSystem;
 using DKRUpdater.Core.Logging;
 using DKRUpdater.Feeds.DKRModels;
@@ -15,12 +17,22 @@ namespace DKRUpdater.Main
 {
     class Program
     {
-        const string AppVersion = "(v.0.2.6)";
+        const string AppVersion = "(v.0.2.7)";
 
         static void Main(string[] args)
         {
             InitializeLogger();
 
+            var soundFileHelper = new SoundFileHelper();
+
+            //soundFileHelper.ToTrimmedMp3(@"C:\test\454.mp3");
+            //soundFileHelper.ToTrimmedMp3(@"C:\test\dm5k19.wav");
+            //soundFileHelper.ToTrimmedMp3(@"C:\test\dm5k19.m4a");
+           // soundFileHelper.ToTrimmedMp3(@"C:\test\070316.mp3");
+
+          //  var pl = PlaylistHelper.BitRateInMp3(@"C:\test\070316.mp3");
+        
+//            return;
             CreateAllRequiredDirectories();
 
             var podcastFeeds = GetPodcastFeeds();

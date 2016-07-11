@@ -52,6 +52,34 @@ namespace DKRUpdater.Core.FileSystem
             return json;
         }
 
+
+        public static void DeleteFile(string filePath)
+        {
+            try
+            {
+                if (!File.Exists(filePath))
+                {
+                    Log.Debug("File: '{0}' does not exist.", filePath);
+                    return;
+                }
+
+                Log.Debug("Deleting file: '{0}'...", filePath);
+                File.Delete(filePath);
+                Log.Debug("Deleted file: '{0}'.", filePath);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(string.Format("File '{0}' couldn't be deleted", filePath), ex);
+            }
+        }
+
+        public static void RenameFile(string fromPath, string toPath)
+        {
+            DeleteFile(toPath);
+
+            MoveFile(fromPath, toPath);
+        }
+
         public static void MoveFile(string fromPath, string toPath)
         {
             try

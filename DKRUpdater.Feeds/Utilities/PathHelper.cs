@@ -1,4 +1,5 @@
 using DKRUpdater.Core;
+using DKRUpdater.Core.Constants;
 using DKRUpdater.Core.Conventions;
 using DKRUpdater.Core.FileConversion;
 using DKRUpdater.Core.Logging;
@@ -18,16 +19,9 @@ namespace DKRUpdater.Feeds.Utilities
 
         public static string SetPathToMp3(string downloadedFilePath)
         {
-            if (FileHelper.IsFileM4a(downloadedFilePath))
-            {
-                var pathToConvertedMp3 = M4A2MP3.ConvertMp4ToMp3(downloadedFilePath);
+            var soundHelper = new SoundFileHelper();
 
-                return pathToConvertedMp3;
-            }
-            else
-            {
-                return downloadedFilePath;
-            }
+            return soundHelper.ToTrimmedMp3(downloadedFilePath);
         }
 
         public static string DownloadFilePath(
@@ -49,10 +43,11 @@ namespace DKRUpdater.Feeds.Utilities
             string destinationDirectoryOfAllPodcastFiles)
         {
             var fileToDownload = FilenameConventions.DownloadFilenameFormatter(podcastFileUrl, feedId, releaseDateOfPodcast);
+            var sounndHelper = new SoundFileHelper();
 
-            if (FileHelper.IsFileM4a(fileToDownload))
+            if (sounndHelper.IsFileM4a(fileToDownload))
             {
-                fileToDownload = fileToDownload.Replace(".m4a", ".mp3");
+                fileToDownload = fileToDownload.Replace(StringConstants.m4a, StringConstants.mp3);
             }
 
             var path = string.Format(@"{0}\{1}",
