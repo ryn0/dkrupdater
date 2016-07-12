@@ -11,7 +11,6 @@ namespace DKRUpdater.Core.FileConversion
     public class SoundFileHelper : ISoundFileHelper
     {
         private static string TrimmedPathPrefix = "_TRIM";
-        private static int MaxMp3Bitrate = 192;        
         private static string PathToExe = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + @"\Utilities";
         private int _currentBitRate = default(int);
 
@@ -31,34 +30,24 @@ namespace DKRUpdater.Core.FileConversion
                 return string.Empty;
             }
 
-            if (IsFileWav(pathToFile))
-                return WavToTrimmedMp3(pathToFile);
+            var extension = Path.GetExtension(pathToFile).ToLower();
 
-            if (IsFileM4a(pathToFile))
-                return M4aToTrimmedMp3(pathToFile);
-
-            if (IsFileMp3(pathToFile))
-                return Mp3ToTrimmedMp3(pathToFile);
-
-            Log.Error("Unknown file to remove silence from: " + pathToFile, new Exception());
+            switch (extension)
+            {
+                case StringConstants.mp3:
+                    return Mp3ToTrimmedMp3(pathToFile);
+                case StringConstants.m4a:
+                    return M4aToTrimmedMp3(pathToFile);
+                case StringConstants.wav:
+                    return WavToTrimmedMp3(pathToFile);
+                default:
+                    Log.Error("Unknown file to remove silence from: " + pathToFile, new Exception());
+                    break;
+            }
 
             return pathToFile;
         }
-
-        private bool IsFileMp3(string pathToFile)
-        {
-            var extension = Path.GetExtension(pathToFile);
-
-            return extension.ToLower() == StringConstants.mp3;
-        }
-
-        private bool IsFileWav(string filePath)
-        {
-            var extension = Path.GetExtension(filePath);
-
-            return extension.ToLower() == StringConstants.wav;
-        }
-
+ 
         public bool IsFileM4a(string filePath)
         {
             var extension = Path.GetExtension(filePath);
@@ -280,8 +269,8 @@ namespace DKRUpdater.Core.FileConversion
 
             Log.Debug("Starting conversion to: '{0}' from file: '{1}' to: '{2}'", StringConstants.mp3, fromPathWav, toPathMp3);
 
-            var bitRateToUse = _currentBitRate == default(int) || _currentBitRate >= MaxMp3Bitrate ?
-                               MaxMp3Bitrate :
+            var bitRateToUse = _currentBitRate == default(int) || _currentBitRate >= IntConstants.MaxMp3KbpsBitrate ?
+                               IntConstants.MaxMp3KbpsBitrate :
                                _currentBitRate;
 
             var command = PathToExe + @"\lame.exe ";
