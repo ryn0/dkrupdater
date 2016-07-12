@@ -1,4 +1,5 @@
 using DKRUpdater.Core;
+using DKRUpdater.Core.Configs;
 using DKRUpdater.Core.Constants;
 using DKRUpdater.Core.Conventions;
 using DKRUpdater.Core.FileConversion;
@@ -30,7 +31,7 @@ namespace DKRUpdater.Feeds.Utilities
             int feedId)
         {
             var path = string.Format(@"{0}\{1}",
-                Core.Constants.StringConstants.Mp3DownloadDirectory,
+                PlaylistConfigs.Mp3DownloadDirectory,
                 FilenameConventions.DownloadFilenameFormatter(podcastFileUrl, feedId, releaseDateOfPodcast));
 
             return path;

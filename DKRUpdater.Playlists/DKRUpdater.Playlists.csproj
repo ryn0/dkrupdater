@@ -61,16 +61,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\DatedPlaylistFile.cs" />
-    <Compile Include="Models\PlaylistConfigs.cs" />
     <Compile Include="Models\PlaylistFile.cs" />
     <Compile Include="Utilities\PlaylistHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="playlist.pls" />
-    <None Include="playlist_configs.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

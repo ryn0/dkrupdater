@@ -1,11 +1,10 @@
-using DKRUpdater.Core.Constants;
+using DKRUpdater.Core.Configs;
 using DKRUpdater.Core.FileSystem;
 using DKRUpdater.Core.Logging;
 using DKRUpdater.Feeds.DKRModels;
 using DKRUpdater.Feeds.Interfaces;
 using DKRUpdater.Feeds.Services;
 using DKRUpdater.Playlists;
-using DKRUpdater.Playlists.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,19 +28,17 @@ namespace DKRUpdater.Main
 
             PutPodcastFilesInDesinationDirectories(downloadedPodcastFilesToProcess);
 
-            var playlistConfiguration = PlaylistConfigs.BuildFromConfigs();
-
-            UpdatePlaylistsWithPlacedFiles(downloadedPodcastFilesToProcess, playlistConfiguration);
+            UpdatePlaylistsWithPlacedFiles(downloadedPodcastFilesToProcess, PlaylistConfigs.MaxInNewMusicPlaylist);
 
             Log.Debug("Completed processing all podcasts!");
         }
 
         private static void CreateAllRequiredDirectories()
         {
-            Directories.CreateDirectoryIfNotExists(StringConstants.Mp3DownloadDirectory);
-            Directories.CreateDirectoryIfNotExists(StringConstants.Mp3LogsDirectory);
-            Directories.CreateDirectoryIfNotExists(StringConstants.Mp3MusicDirectory);
-            Directories.CreateDirectoryIfNotExists(StringConstants.Mp3PlaylistsDirectory);
+            Directories.CreateDirectoryIfNotExists(PlaylistConfigs.Mp3DownloadDirectory);
+            Directories.CreateDirectoryIfNotExists(PlaylistConfigs.Mp3LogsDirectory);
+            Directories.CreateDirectoryIfNotExists(PlaylistConfigs.Mp3MusicDirectory);
+            Directories.CreateDirectoryIfNotExists(PlaylistConfigs.Mp3PlaylistsDirectory);
         }
 
         private static List<IRetrievablePodcast> GetPodcastFeeds()
@@ -56,7 +53,7 @@ namespace DKRUpdater.Main
         private static List<DKRPodcastFileToProcess> GetDownloadedFilesFromPodcasts(List<IRetrievablePodcast> podcasts)
         {
             // clean the diretory of any partially downloaded files
-            FileOperations.DeleteAllFilesInDirectory(StringConstants.Mp3DownloadDirectory);
+            FileOperations.DeleteAllFilesInDirectory(PlaylistConfigs.Mp3DownloadDirectory);
 
             var feedRetrievalService = new FeedRetrievalService();
 
@@ -78,7 +75,7 @@ namespace DKRUpdater.Main
 
         private static void UpdatePlaylistsWithPlacedFiles(
             List<DKRPodcastFileToProcess> downloadedPodcasts, 
-            PlaylistConfigs playlistConfigs)
+            int maxInNewMusicPlaylist)
         {
             var distinctPlaylists = downloadedPodcasts.SelectMany(item => item.PlaylistPathsToIncludeIn)
                                                       .Distinct()
@@ -90,7 +87,7 @@ namespace DKRUpdater.Main
                 var mp3sForPlaylist = downloadedPodcasts.Where(file => file.PlaylistPathsToIncludeIn.Contains(playlist))
                                                                                                     .ToList();
 
-                AddMp3sToPlaylist(playlist, mp3sForPlaylist, playlistConfigs.MaxInNewMusicPlaylist);
+                AddMp3sToPlaylist(playlist, mp3sForPlaylist, maxInNewMusicPlaylist);
             }
         }
         

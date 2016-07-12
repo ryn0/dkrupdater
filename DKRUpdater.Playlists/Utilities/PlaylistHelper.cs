@@ -1,4 +1,4 @@
-using DKRUpdater.Core.Constants;
+using DKRUpdater.Core.Configs;
 using DKRUpdater.Core.Logging;
 using DKRUpdater.Core.StringParsing;
 using DKRUpdater.Feeds.DKRModels;
@@ -338,7 +338,7 @@ Version=2";
 
         private static bool IsNewMusicPlaylist(string pathToPlaylist)
         {
-            return pathToPlaylist.ToLower().Contains(StringConstants.NewMusicPlaylist.ToLower());
+            return pathToPlaylist.ToLower().Contains(PlaylistConfigs.NewMusicPlaylist.ToLower());
         }
     }
 }

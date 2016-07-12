@@ -1,0 +1,8 @@
+{
+  "maxInNewMusicPlaylist": 13,
+  "mp3DownloadDirectory": "C:\\MP3s\\downloads",
+  "mp3LogsDirectory": "C:\\MP3s\\logs",
+  "mp3MusicDirectory": "C:\\MP3s\\music",
+  "mp3PlaylistsDirectory": "C:\\MP3s\\playlist",
+  "newMusicPlaylist": "C:\\MP3s\\playlist\\newmusic.pls"
+}
