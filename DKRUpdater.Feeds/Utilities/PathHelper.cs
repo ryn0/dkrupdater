@@ -22,7 +22,7 @@ namespace DKRUpdater.Feeds.Utilities
         {
             var soundHelper = new SoundFileHelper();
 
-            return soundHelper.ToTrimmedMp3(downloadedFilePath);
+            return soundHelper.ToMp3(downloadedFilePath);
         }
 
         public static string DownloadFilePath(

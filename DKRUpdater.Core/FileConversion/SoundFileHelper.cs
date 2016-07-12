@@ -5,6 +5,7 @@ using DKRUpdater.Core.Constants;
 using DKRUpdater.Core.Logging;
 using System.Diagnostics;
 using DKRUpdater.Core.FileSystem;
+using DKRUpdater.Core.Configs;
 
 namespace DKRUpdater.Core.FileConversion
 {
@@ -14,7 +15,7 @@ namespace DKRUpdater.Core.FileConversion
         private static string PathToExe = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + @"\Utilities";
         private int _currentBitRate = default(int);
 
-        public string ToTrimmedMp3(string pathToFile)
+        public string ToMp3(string pathToFile)
         {
             try
             {
@@ -32,17 +33,34 @@ namespace DKRUpdater.Core.FileConversion
 
             var extension = Path.GetExtension(pathToFile).ToLower();
 
-            switch (extension)
+            if (PlaylistConfigs.TrimSilence)
             {
-                case StringConstants.mp3:
-                    return Mp3ToTrimmedMp3(pathToFile);
-                case StringConstants.m4a:
-                    return M4aToTrimmedMp3(pathToFile);
-                case StringConstants.wav:
-                    return WavToTrimmedMp3(pathToFile);
-                default:
-                    Log.Error("Unknown file to remove silence from: " + pathToFile, new Exception());
-                    break;
+                switch (extension)
+                {
+                    case StringConstants.mp3:
+                        return Mp3ToTrimmedMp3(pathToFile);
+                    case StringConstants.m4a:
+                        return M4aToTrimmedMp3(pathToFile);
+                    case StringConstants.wav:
+                        return WavToTrimmedMp3(pathToFile);
+                    default:
+                        Log.Error("Unknown file to remove silence from: " + pathToFile, new Exception());
+                        break;
+                }
+            }
+            else
+            {
+                switch (extension)
+                {
+                    case StringConstants.mp3:
+                        return pathToFile;
+                    case StringConstants.m4a:
+                        var pathToWav = ConvertM4aToWav(pathToFile);
+                        return ConvertWavToMp3(pathToWav);
+                    default:
+                        Log.Error("Unknown file: " + pathToFile, new Exception());
+                        break;
+                }
             }
 
             return pathToFile;
@@ -55,13 +73,13 @@ namespace DKRUpdater.Core.FileConversion
             return extension.ToLower() == StringConstants.m4a;
         }
 
-        private string ConvertWavToMp3(string trimmedWavPath)
+        private string ConvertWavToMp3(string wavPath)
         {
-            var pathToMp3 = trimmedWavPath.Replace(StringConstants.wav, StringConstants.mp3);
+            var pathToMp3 = wavPath.Replace(StringConstants.wav, StringConstants.mp3);
 
-            ConvertWavToMp3(trimmedWavPath, pathToMp3);
+            ConvertWavToMp3(wavPath, pathToMp3);
 
-            FileOperations.DeleteFile(trimmedWavPath);
+            FileOperations.DeleteFile(wavPath);
 
             return pathToMp3;
         }

@@ -7,7 +7,7 @@
         /// </summary>
         /// <param name="pathToFile"></param>
         /// <returns></returns>
-        string ToTrimmedMp3(string pathToFile);
+        string ToMp3(string pathToFile);
 
         bool IsFileM4a(string filePath);
     }

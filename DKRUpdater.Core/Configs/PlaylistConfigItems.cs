@@ -20,6 +20,9 @@ namespace DKRUpdater.Core.Configs
         public string Mp3PlaylistsDirectory { get; set; }
 
         [JsonProperty(PropertyName = "newMusicPlaylist")]
-        public string NewMusicPlaylist { get; set; } 
+        public string NewMusicPlaylist { get; set; }
+
+        [JsonProperty(PropertyName = "trimSilence")]
+        public bool TrimSilence { get; set; }
     }
 }

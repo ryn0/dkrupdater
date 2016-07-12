@@ -73,5 +73,13 @@ namespace DKRUpdater.Core.Configs
             }
         }
 
+        public static bool TrimSilence
+        {
+            get
+            {
+                return _playlistConfigItems.TrimSilence;
+            }
+        }
+
     }
 }

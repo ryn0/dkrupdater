@@ -4,5 +4,7 @@
   "mp3LogsDirectory": "C:\\MP3s\\logs",
   "mp3MusicDirectory": "C:\\MP3s\\music",
   "mp3PlaylistsDirectory": "C:\\MP3s\\playlist",
-  "newMusicPlaylist": "C:\\MP3s\\playlist\\newmusic.pls"
+  "newMusicPlaylist": "C:\\MP3s\\playlist\\newmusic.pls",
+  "trimSilence" :  false
+
 }
