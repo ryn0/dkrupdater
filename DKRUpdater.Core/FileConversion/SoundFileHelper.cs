@@ -10,11 +10,10 @@ namespace DKRUpdater.Core.FileConversion
 {
     public class SoundFileHelper : ISoundFileHelper
     {
-        private static string TrimmedPathPrefix = "_TRIMMED";
+        private static string TrimmedPathPrefix = "_TRIM";
         private static int MaxMp3Bitrate = 192;        
         private static string PathToExe = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + @"\Utilities";
-
-        private int _currentBitRate = 0;
+        private int _currentBitRate = default(int);
 
         public string ToTrimmedMp3(string pathToFile)
         {
@@ -156,13 +155,42 @@ namespace DKRUpdater.Core.FileConversion
                 return string.Empty;
             }
 
-            var trimmedWavPath = pathToWav.Replace(StringConstants.wav, TrimmedPathPrefix + StringConstants.wav);
+            var trimmedWavFront = pathToWav.Replace(StringConstants.wav, "_FRONT" + TrimmedPathPrefix + StringConstants.wav);
 
-            Log.Debug("Trimming: '{0}' to: '{1}'...", pathToWav, trimmedWavPath);
+            Log.Debug("Trimming: '{0}'...", pathToWav);
 
             var command = PathToExe + @"\sox-14-4-2\sox.exe";
-            var args = string.Format(" {0} {1} silence 1 0.1 1% reverse silence 1 0.1 1% reverse ", InQuotes(pathToWav), InQuotes(trimmedWavPath));
+
+            // front
+            var args = string.Format(" {0} {1} silence 1 0.1 1% reverse ", InQuotes(pathToWav), InQuotes(trimmedWavFront));
             var process = new Process();
+
+            process.StartInfo.FileName = command;
+            process.StartInfo.Arguments = args;
+
+            Log.Debug("Command to run: '{0}' with args: '{1}'", command, args);
+
+            try
+            {
+                process.Start();
+                process.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Failed to trim file", ex);
+                return string.Empty;
+            }
+            finally
+            {
+                process.Dispose();
+            }
+
+            FileOperations.DeleteFile(pathToWav);
+
+            // back
+            var trimmedWavBack = pathToWav.Replace(StringConstants.wav, "_BACK" + TrimmedPathPrefix + StringConstants.wav);
+            args = string.Format(" {0} {1} silence 1 0.1 1% reverse ", InQuotes(trimmedWavFront), InQuotes(trimmedWavBack));
+            process = new Process();
 
             process.StartInfo.FileName = command;
             process.StartInfo.Arguments = args;
@@ -186,13 +214,11 @@ namespace DKRUpdater.Core.FileConversion
 
             Log.Debug("Completed trim.");
 
-            FileOperations.DeleteFile(pathToWav);
+            FileOperations.DeleteFile(trimmedWavFront);
 
-            FileOperations.RenameFile(trimmedWavPath, pathToWav);
+            FileOperations.RenameFile(trimmedWavBack, pathToWav);
 
-            trimmedWavPath = pathToWav;
-
-            return trimmedWavPath;
+            return pathToWav;
         }
 
         private string ConvertM4aToWav(string pathToM4a)
@@ -254,7 +280,7 @@ namespace DKRUpdater.Core.FileConversion
 
             Log.Debug("Starting conversion to: '{0}' from file: '{1}' to: '{2}'", StringConstants.mp3, fromPathWav, toPathMp3);
 
-            var bitRateToUse = _currentBitRate == 0 || _currentBitRate >= MaxMp3Bitrate ?
+            var bitRateToUse = _currentBitRate == default(int) || _currentBitRate >= MaxMp3Bitrate ?
                                MaxMp3Bitrate :
                                _currentBitRate;
 

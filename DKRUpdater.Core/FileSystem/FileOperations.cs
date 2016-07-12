@@ -75,9 +75,13 @@ namespace DKRUpdater.Core.FileSystem
 
         public static void RenameFile(string fromPath, string toPath)
         {
+            Log.Debug("Renaming file: '{0}' to: '{1}'...", fromPath, toPath);
+
             DeleteFile(toPath);
 
             MoveFile(fromPath, toPath);
+
+            Log.Debug("done.");
         }
 
         public static void MoveFile(string fromPath, string toPath)
