@@ -2,7 +2,7 @@
   "feeds": [
     {
       "feedId": 1,
-      "maxFilesToDownload": 1,
+      "maxFilesToDownload": 2,
       "podcastUrl": "http://dancemachine5000.com/feed/",
       "destinationDirectory": "C:\\MP3s\\music\\dancemachine5000",
       "targetPlaylistPaths": [
@@ -12,7 +12,7 @@
     },
     {
       "feedId": 2,
-      "maxFilesToDownload": 1,
+      "maxFilesToDownload": 2,
       "podcastUrl": "http://www.darkhorizonsradio.com/podcasts/shows/Dark_Horizons.xml",
       "destinationDirectory": "C:\\MP3s\\music\\Dark_Horizons",
       "targetPlaylistPaths": [
@@ -21,7 +21,7 @@
     },
     {
       "feedId": 4,
-      "maxFilesToDownload": 4,
+      "maxFilesToDownload": 2,
       "podcastUrl": "http://therequiem.libsyn.com/rss",
       "destinationDirectory": "C:\\MP3s\\music\\therequiem",
       "targetPlaylistPaths": [
@@ -35,7 +35,7 @@
     },
     {
       "feedId": 5,
-      "maxFilesToDownload": 1,
+      "maxFilesToDownload": 2,
       "podcastUrl": "http://feeds.feedburner.com/RadioBlastFurnace",
       "destinationDirectory": "C:\\MP3s\\music\\radioblastfurnace",
       "targetPlaylistPaths": [
@@ -45,7 +45,7 @@
     },
     {
       "feedId": 6,
-      "maxFilesToDownload": 1,
+      "maxFilesToDownload": 2,
       "podcastUrl": "http://feeds.feedburner.com/djrazorgrrl?format=xml",
       "destinationDirectory": "C:\\MP3s\\music\\distorted_circuitry",
       "targetPlaylistPaths": [
@@ -55,7 +55,7 @@
     },
     {
       "feedId": 7,
-      "maxFilesToDownload": 20,
+      "maxFilesToDownload": 2,
       "podcastUrl": "http://www.cyberage.cx/cybercast.php",
       "destinationDirectory": "C:\\MP3s\\music\\cyberageradio",
       "targetPlaylistPaths": [
@@ -75,7 +75,7 @@
     },
     {
       "feedId": 9,
-      "maxFilesToDownload": 1,
+      "maxFilesToDownload": 2,
       "podcastUrl": "http://feeds.feedburner.com/IndustrialStrengthNightmaresRadio?format=xml",
       "destinationDirectory": "C:\\MP3s\\music\\isn radio",
       "targetPlaylistPaths": [
