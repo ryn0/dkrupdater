@@ -20,16 +20,6 @@
       ]
     },
     {
-      "feedId": 3,
-      "maxFilesToDownload": 1,
-      "podcastUrl": "http://oontzcast.podbean.com/feed/",
-      "destinationDirectory": "C:\\MP3s\\music\\oontzcast",
-      "targetPlaylistPaths": [
-        "C:\\MP3s\\playlist\\newmusic.pls",
-        "C:\\MP3s\\playlist\\oontzcast.pls"
-      ]
-    },
-    {
       "feedId": 4,
       "maxFilesToDownload": 4,
       "podcastUrl": "http://therequiem.libsyn.com/rss",
@@ -65,12 +55,12 @@
     },
     {
       "feedId": 7,
-      "maxFilesToDownload": 2,
+      "maxFilesToDownload": 20,
       "podcastUrl": "http://www.cyberage.cx/cybercast.php",
       "destinationDirectory": "C:\\MP3s\\music\\cyberageradio",
       "targetPlaylistPaths": [
         "C:\\MP3s\\playlist\\newmusic.pls",
-        "C:\\MP3s\\playlist\\generalpodcasts.pls"
+        "C:\\MP3s\\playlist\\cyberage.pls"
       ]
     },
     {
