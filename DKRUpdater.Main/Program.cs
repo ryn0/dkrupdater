@@ -1,6 +1,4 @@
-using DKRUpdater.Core;
 using DKRUpdater.Core.Constants;
-using DKRUpdater.Core.FileConversion;
 using DKRUpdater.Core.FileSystem;
 using DKRUpdater.Core.Logging;
 using DKRUpdater.Feeds.DKRModels;
@@ -17,7 +15,7 @@ namespace DKRUpdater.Main
 {
     class Program
     {
-        const string AppVersion = "(v.0.2.7)";
+        const string AppVersion = "(v.0.2.8)";
 
         static void Main(string[] args)
         {
