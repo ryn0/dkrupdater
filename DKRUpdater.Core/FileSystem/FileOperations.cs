@@ -52,7 +52,6 @@ namespace DKRUpdater.Core.FileSystem
             return json;
         }
 
-
         public static void DeleteFile(string filePath)
         {
             try

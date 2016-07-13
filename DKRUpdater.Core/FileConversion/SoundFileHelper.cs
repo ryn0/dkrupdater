@@ -65,13 +65,6 @@ namespace DKRUpdater.Core.FileConversion
 
             return pathToFile;
         }
- 
-        public bool IsFileM4a(string filePath)
-        {
-            var extension = Path.GetExtension(filePath);
-
-            return extension.ToLower() == StringConstants.m4a;
-        }
 
         private string ConvertWavToMp3(string wavPath)
         {

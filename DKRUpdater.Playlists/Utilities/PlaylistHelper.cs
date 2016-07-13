@@ -108,7 +108,6 @@ Version=2";
 
         private static void CreateDefaultPlaylist(string playlistPath)
         {
-            
             try
             {
                 Log.Debug(string.Format("Creating new playlist at: '{0}'", playlistPath));

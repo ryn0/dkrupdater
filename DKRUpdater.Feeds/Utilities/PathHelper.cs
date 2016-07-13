@@ -44,13 +44,7 @@ namespace DKRUpdater.Feeds.Utilities
             string destinationDirectoryOfAllPodcastFiles)
         {
             var fileToDownload = FilenameConventions.DownloadFilenameFormatter(podcastFileUrl, feedId, releaseDateOfPodcast);
-            var sounndHelper = new SoundFileHelper();
-
-            if (sounndHelper.IsFileM4a(fileToDownload))
-            {
-                fileToDownload = fileToDownload.Replace(StringConstants.m4a, StringConstants.mp3);
-            }
-
+          
             var path = string.Format(@"{0}\{1}",
                             destinationDirectoryOfAllPodcastFiles,
                             fileToDownload);

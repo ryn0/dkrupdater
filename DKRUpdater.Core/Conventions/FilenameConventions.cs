@@ -1,3 +1,4 @@
+using DKRUpdater.Core.Constants;
 using DKRUpdater.Core.StringParsing;
 using System;
 
@@ -20,6 +21,12 @@ namespace DKRUpdater.Core.Conventions
             var fileNameFromUrl = UrlParsing.GetFileNameFromUrl(uriOfFile);
 
             var cleanedFileName = FileNameParsing.CleanFileName(fileNameFromUrl);
+
+            if (cleanedFileName.EndsWith(StringConstants.m4a))
+            {
+                // this represents the final file format that should exist
+                cleanedFileName = cleanedFileName.Replace(StringConstants.m4a, StringConstants.mp3);
+            }
 
             var fileName = string.Format(format, dateFormatted, feedId, cleanedFileName);
 

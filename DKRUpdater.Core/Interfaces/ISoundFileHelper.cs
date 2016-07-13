@@ -7,8 +7,6 @@
         /// </summary>
         /// <param name="pathToFile"></param>
         /// <returns></returns>
-        string ToMp3(string pathToFile);
-
-        bool IsFileM4a(string filePath);
+        string ToMp3(string pathToFile); 
     }
 }
