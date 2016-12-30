@@ -14,7 +14,7 @@ namespace DKRUpdater.Main
 {
     class Program
     {
-        const string AppVersion = "(v.0.2.8)";
+        const string AppVersion = "(v.0.2.9)";
 
         static void Main(string[] args)
         {
